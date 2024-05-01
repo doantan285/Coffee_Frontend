@@ -1,0 +1,47 @@
+header{
+  position: relative;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1{
+    font-weight: bold;
+    color: #5e1f18;
+    margin: 0;
+  }
+  .close{
+    position: absolute;
+    right: 30px;
+    top: 20px;
+  }
+}
+.product{
+  padding: 20px 100px;
+  .product__list{
+    height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: darkgrey lightgrey;
+    .product__list--item{
+      font-weight: bold;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .name{
+        border-right: 1px solid #ccc;
+        width: 200px;
+        margin-right: 10px;
+      }
+      .total{
+        float: left;
+        border-right: 1px solid #ccc;
+        margin-right: 10px;
+        width: 80px;
+      }
+      .price{
+        width: 100px;
+      }
+    }
+  }
+}

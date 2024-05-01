@@ -1,0 +1,11 @@
+<app-share-manage
+  [emptyOrder]="true"
+  [rowData]="data"
+  [loading]="loading"
+  [noData]="noData"
+  (detailEmptyOrder)="detail($event)"
+  (tableEmptyOrder)="order($event)"
+  (clearValueSearch)="clearValueSearch()"
+  (searchValue)="onSearch($event)"
+  (updateRow)="updateRow($event)"
+></app-share-manage>

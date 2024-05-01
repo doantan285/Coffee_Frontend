@@ -1,0 +1,72 @@
+<div class="createAccount">
+  <section class="header">
+    <h1 style="font-weight: bold; color: #5e1f18">{{'manage.manageUser.createUser' | translate}}</h1>
+    <div class="closeCreateAccount">
+      <button class="close" (click)="close()"><i class="fas fa-times"></i></button>
+    </div>
+  </section>
+  <section class="content">
+    <form class="addForm" [formGroup]="createUserForm" (ngSubmit)="submit()">
+      <div class="row-control"  style="position: relative">
+        <mat-form-field style="width: 360px; border-radius: 4px">
+          <mat-label>{{'manage.manageAccount.role' | translate}}</mat-label>
+          <mat-select formControlName="role">
+            <mat-option value="admin">{{'global.manage' | translate}}</mat-option>
+            <mat-option value="employee">{{'global.employee' | translate}}</mat-option>
+          </mat-select>
+          <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createUserForm.get('role')?.hasError('required') || createUserForm.get('role')?.hasError('passwordMismatch')) && (createUserForm.get('role')?.touched || createUserForm.get('role')?.dirty)">
+            {{ 'global.required' | translate }}
+          </p>
+        </mat-form-field>
+      </div>
+      <div class="row-control"  style="position: relative">
+        <mat-form-field style="width: 360px; border-radius: 4px">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="time">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row-control" style="position: relative">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="email..." formControlName="email"/>
+          <mat-error style="color: #931a0e" *ngIf="createUserForm.get('email')?.hasError('required') && createUserForm.get('email')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createUserForm.get('email')?.hasError('required') || createUserForm.get('email')?.hasError('passwordMismatch')) && (createUserForm.get('email')?.touched || createUserForm.get('email')?.dirty)">
+          {{ 'global.required' | translate }}
+        </p>
+      </div>
+      <div class="row-control" style="position: relative">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>{{'manage.manageUser.role' | translate}}</mat-label>
+          <input matInput placeholder="phone number..." formControlName="phone"  (keypress)="validateNumber($event)" />
+          <mat-error style="color: #931a0e" *ngIf="createUserForm.get('phone')?.hasError('required') && createUserForm.get('phone')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createUserForm.get('phone')?.hasError('required') || createUserForm.get('phone')?.hasError('passwordMismatch')) && (createUserForm.get('phone')?.touched || createUserForm.get('phone')?.dirty)">
+          {{ 'global.required' | translate }}
+        </p>
+      </div>
+      <div class="row-control"  style="position: relative">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>Usser Name</mat-label>
+          <input matInput placeholder="Usser Name..." formControlName="username" />
+          <mat-error style="color: #931a0e" *ngIf="createUserForm.get('username')?.hasError('required') && createUserForm.get('password')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createUserForm.get('username')?.hasError('required') || createUserForm.get('username')?.hasError('passwordMismatch')) && (createUserForm.get('username')?.touched || createUserForm.get('username')?.dirty)">
+          {{ 'global.required' | translate }}
+        </p>
+      </div>
+
+      <button style="background-color: #007bff; color: #fff" [disabled]="!createUserForm.valid" mat-button type="submit">Submit</button>
+    </form>
+  </section>
+</div>
+

@@ -1,0 +1,28 @@
+.table__detail{
+  header{
+    padding: 0 36px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .nameDetail{
+      font-size: 24px;
+      font-weight: 700;
+      color: #5e1f18;
+    }
+  }
+
+  .content_detail{
+    padding: 20px 40px;
+    .content_detail--item{
+      padding-bottom: 20px;
+      .content_detail-title{
+        font-size: 24px;
+        font-weight: 400;
+      }
+      .color{
+        color: #5e1f18;
+      }
+    }
+  }
+}

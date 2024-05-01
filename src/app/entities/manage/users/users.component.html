@@ -1,0 +1,12 @@
+<app-share-manage
+  [users]="true"
+  [rowData]="dataUsers"
+  [loading]="loading"
+  [noData]="noData"
+  (searchValue)="onSearch($event)"
+  (updateRow)="updateRow($event)"
+  (OnRefresh)="refresh($event)"
+  (clearValueSearch)="clearValueSearch($event)"
+  (addUser)="addUser($event)"
+></app-share-manage>
+

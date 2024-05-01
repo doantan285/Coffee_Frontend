@@ -1,0 +1,73 @@
+
+.login{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  .mat-mdc-form-field-flex{
+    height: 60px!important;
+  }
+
+  align-items: center;
+  &::before{
+    content: '';
+    background: url("/assets/img/nl2.jpg") no-repeat center center/cover;
+    position: absolute;
+    opacity: 0.6;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+  }
+  .login__form{
+    background-color: #fff;
+    z-index: 10000;
+    border: 1px solid #555555;
+    box-shadow: 5px 10px 8px 10px #6b6464;
+    border-radius: 12px;
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    .login__form--content{
+      .row-control{
+        width: 300px;
+        .mat-mdc-form-field{
+          width: 100%!important;
+        }
+      }
+      .row-actions{
+        text-align: end;
+        margin-top: 40px;
+      }
+      .login__lang{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+        .login__lang--btn{
+          cursor: pointer;
+          color: #fff;
+          height: 40px;
+          width: 40px;
+          border: none;
+          border-radius: 50%;
+          background-color: #5e1f18;
+          transition: font-size 0.3s ease;
+          &:hover{
+            opacity: 0.8;
+            font-weight: bold;
+          }
+        }
+
+      }
+    }
+  }
+}
+.login[_ngcontent-ng-c3166496113]{
+  align-items: center;
+}

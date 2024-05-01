@@ -1,0 +1,126 @@
+.content{
+  padding: 40px 100px;
+  background-color: #fff;
+  .order{
+    height: 400px;
+    display: flex;
+    .order__left{
+      display: flex;
+      justify-content: center;
+      .order__left--img{
+        width: 410px;
+        height: 400px;
+        border-radius: 14px;
+        overflow: hidden;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .order__right{
+      position: relative;
+      padding: 50px 0 0 50px;
+      h1{
+        color: #5e1f18;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 24px;
+      }
+      p{
+        margin-top: 20px;
+        font-size: 20px;
+      }
+      .quantity-control{
+        position: absolute;
+        bottom: 40px;
+        left: 50px;
+        .quantity-btn{
+          background-color: #e0d9d9;
+          border: none;
+          padding: 8px 14px;
+        }
+        .btn_order{
+          padding: 30px 40px;
+          border: 1px solid #931a0e;
+          border-radius: 14px;
+          margin-left: 50px;
+          transition: transform 0.3s ease;
+          &:hover{
+            transform: scale(1.1);
+            background-color: #931a0e;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .detail__comment{
+    padding: 20px 40px;
+    margin-left: 16px;
+    margin-top: 40px;
+    .comment__btn{
+      form{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+      }
+
+      display: flex;
+      justify-content: end;
+      .input__comment{
+        margin-right: 20px;
+        width: 100%!important;
+        .input{
+          padding: 0 20px;
+        }
+      }
+      .comment{
+        width: 100px;
+        height: 50px;
+        background-color: #8a544e;
+        color: #fff;
+      }
+    }
+    .commnet__content{
+      padding: 0 200px;
+      margin-top: 30px;
+      .itemcomment{
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .comment__left{
+          display: flex;
+          align-items: center;
+        }
+        .deletecomment{
+          border: none;
+          border-radius: 4px;
+          i{
+            transition: font-size 0.3s ease;
+            &:hover{
+              opacity: 0.8;
+              font-weight: bold;
+            }
+          }
+        }
+        .user{
+          margin-right: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: #dfe2e7;
+        }
+        .itemcomment__content{
+          .time__comment{
+
+          }
+        }
+      }
+    }
+  }
+}

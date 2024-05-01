@@ -1,0 +1,143 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.green-snackbar{
+  background-color: green!important;
+  color: white!important;
+}
+html, body { height: 100%; }
+body { margin: 0;
+  font-family: "Times New Roman", "Helvetica Neue", sans-serif;
+  background-color: #e4e5e6;
+
+  .highcharts-credits{
+    display: none;
+  }
+  .mat-mdc-menu-content{
+    padding: 0;
+  }
+  .mat-mdc-menu-item:not([disabled]):hover{
+    background-color: #b22830;
+    color: #fff;
+  }
+  .mat-drawer-content{
+    background-color: #f2f2f3;
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  .mat-mdc-form-field-flex{
+    height: 46px;
+  }
+  .mat-mdc-form-field-focus-overlay{
+    border-bottom: none;
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before{
+    display: none;
+  }
+  .mat-mdc-button-touch-target,.mat-ripple mat-mdc-button-ripple{
+    height: 30px!important;
+    width: 30px!important;
+  }
+  .mat-mdc-text-field-wrapper{
+    width: 104%;
+    height: 46px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding-left: 0;
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    background-color: #fff;
+  }
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix{
+    padding: 0;
+    height: 46px!important;
+  }
+  .mat-mdc-form-field-infix{
+    min-height: 46px!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .mat-date-range-input-container{
+    width: 220px;
+    padding-left: 20px;
+  }
+  .mat-mdc-icon-button.mat-mdc-button-base{
+    background-color: #fff;
+    &:focus{
+      background-color: #fff;
+      outline: none;
+    }
+  }
+  .mdc-icon-button{
+    padding: 4px;
+  }
+  .mat-mdc-menu-panel{
+    max-width: 500px;
+  }
+
+  .mat-mdc-menu-content{
+    min-width: 300px;
+  }
+
+  button{
+    &:focus{
+      outline-color: rgba(0,0,0,0);
+    }
+  }
+  .table::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .table::-webkit-scrollbar-thumb {
+    background-color: #bdb8b8;
+    border-radius: 6px;
+  }
+
+  .table::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  .table table thead th {
+    border-bottom: 1px solid #6b6464;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .example-sidenav-content[_ngcontent-ng-c136456050] .content[_ngcontent-ng-c136456050]{
+    padding: 10px 20px 0 20px;
+  }
+  .example-sidenav-content[_ngcontent-ng-c136456050] .content[_ngcontent-ng-c136456050] .search[_ngcontent-ng-c136456050]{
+    margin-bottom: 10px;
+  }
+  .menuAction{
+    width: 200px;
+    overflow-x: hidden;
+  }
+
+  .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{
+    stroke: #007bff!important;
+  }
+
+  .active{
+    background-color: #931a0e !important;
+    color: #fff !important;
+  }
+  .mat-mdc-text-field-wrapper{
+    width: 100%;
+  }
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix{
+    padding-left: 10px;
+    padding-right: 10px;
+
+  }
+  .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-form-field-infix{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 14px;
+  }
+  body .mat-mdc-text-field-wrapper{
+    border-radius: 10px;
+  }
+
+}

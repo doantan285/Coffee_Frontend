@@ -1,0 +1,34 @@
+.edit_paid{
+  position: relative;
+  .closeEdit{
+    position: absolute;
+    top: -27px;
+    right: 10px;
+    background-color: #fff;
+    border: none;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  .edit__heading{
+    font-weight: bold;
+    color: #5e1f18;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+
+  .edit__btn{
+    display: flex;
+    align-content: end;
+    justify-content: space-around;
+    .edit__oke{
+      &:hover{
+        background-color: #931a0e;
+        color: #fff;
+      }
+    }
+    .btn{
+      background-color: #d7d7db;
+    }
+  }
+}

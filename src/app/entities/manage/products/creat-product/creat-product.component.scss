@@ -1,0 +1,186 @@
+.editProduct{
+  padding: 20px 24px;
+  .header{
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    .bookmark{
+      .outStock{
+        padding: 0;
+        border: none;
+        background-color: rgba(0,0,0,0);
+        i{
+          font-size: 20px;
+        }
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    h1{
+      font-weight: bold;
+      margin: 0;
+      font-size: 24px;
+      color: #5e1f18;
+      text-align: center;
+    }
+    .close{
+      i{
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        &:hover{
+          transform: scale(1.2);
+        }
+      }
+
+    }
+  }
+  .content{
+    display: flex;
+    .content__left{
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0 20px 40px;
+
+      width: 40%;
+      height: 420px;
+
+      .content__left--img{
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        width: 300px;
+        height: 280px;
+
+        .imgMising{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 6px;
+          overflow: hidden;
+          width: 300px;
+          height: 280px;
+          background-color: #8c8282;
+        }
+        img{
+
+          border-radius: 6px;
+          overflow: hidden;
+          width: 300px;
+          height: 280px;
+        }
+
+        .content__left--img-close{
+          border: none;
+          background-color: rgba(0,0,0,0);
+          top: 10px;
+          right: 10px;
+          position: absolute;
+          i{
+            padding: 4px;
+            font-size: 18px;
+            color: #fff;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            &:hover{
+              transform: scale(1.2);
+            }
+          }
+        }
+
+      }
+
+      .content__left--input{
+        width: 300px;
+        margin-top: 30px;
+        input{
+          font-size: 15px;
+        }
+      }
+      .content__left--input {
+        flex: 1;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 10px; /* Kích thước padding */
+        margin-top: 10px; /* Khoảng cách giữa ảnh và input file */
+        border: 1px solid #ddd; /* Viền xung quanh input file */
+        border-radius: 4px; /* Góc bo của input file */
+        box-sizing: border-box;
+      }
+
+      /* Style khi input file được chọn */
+      .form-control:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+      }
+    }
+    .content__right{
+      padding: 20px 20px;
+      width: 60%;
+      height: 420px;
+
+      .form{
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+
+        .row-control{
+          background-color: #fff;
+          margin-bottom: 20px;
+          .action{
+            margin-right: 30px;
+            background-color: #007bff;
+            color: #fff;
+          }
+          .menuAction{
+            width: 200px;
+            overflow-x: hidden;
+          }
+          .active{
+            background-color: #931a0e !important;
+            color: #fff !important;
+          }
+          .input-container {
+            display: flex;
+            align-items: center;
+          }
+
+          .currency {
+            margin-left: 10px;
+          }
+
+          .example-full-width {
+            height: 170px;
+            width: 100%;
+          }
+          .create{
+            height: 150px!important;
+          }
+          .mat-mdc-form-field{
+            width: 100%;
+            padding: 0;
+          }
+          .mat-mdc-text-field-wrapper{
+            padding: 0!important;
+          }
+        }
+      }
+    }
+  }
+  .footer{
+    margin-right: 50px;
+    margin-top: 10px;
+    height: 50px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    button{
+      background-color: #b6bcc5;
+    }
+  }
+}

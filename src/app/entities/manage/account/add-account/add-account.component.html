@@ -1,0 +1,79 @@
+<div class="createAccount">
+  <section class="header">
+    <h1 style="font-weight: bold; color: #5e1f18" >{{data?.type ? ('manage.manageAccount.edit' | translate) : ('manage.manageAccount.create' | translate)}}</h1>
+    <div class="closeCreateAccount">
+      <button class="close" (click)="close()"><i class="fas fa-times"></i></button>
+    </div>
+  </section>
+  <section class="content">
+    <section class="content__img" style="align-items: center!important;">
+      <div class="content--imgadd">
+        <div style="display: flex; justify-content: center" class="imgMising" *ngIf="missingImg && !imageUrl">
+          <span style="color: #fff">{{'manage.missingImg' | translate}}</span>
+        </div>
+        <div style="display: flex; justify-content: center" class="imgMising" *ngIf="imageUrl === ''">
+          <span style="color: #fff">{{'manage.missingImg' | translate}}</span>
+        </div>
+        <div style="display: flex; justify-content: center">
+          <img width="100%" *ngIf="imageUrl" [src]="imageUrl" class="image">
+        </div>
+      </div>
+      <div class="contentadd-input">
+        <input type="file" (change)="handleFileInput($event)"/>
+      </div>
+    </section>
+    <form class="addForm" [formGroup]="createAccountForm" (ngSubmit)="submit()">
+      <div class="row-control"  style="position: relative">
+        <mat-form-field style="width: 360px; border-radius: 4px">
+          <mat-label>{{'manage.manageAccount.role' | translate}}</mat-label>
+          <mat-select formControlName="role">
+            <mat-option value="admin">{{'global.manage' | translate}}</mat-option>
+            <mat-option value="employee">{{'global.employee' | translate}}</mat-option>
+          </mat-select>
+          <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createAccountForm.get('role')?.hasError('required') || createAccountForm.get('role')?.hasError('passwordMismatch')) && (createAccountForm.get('role')?.touched || createAccountForm.get('role')?.dirty)">
+            {{ 'global.required' | translate }}
+          </p>
+        </mat-form-field>
+      </div>
+      <div class="row-control" style="position: relative">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>{{'global.email' | translate}}</mat-label>
+          <input matInput placeholder="email..." formControlName="email"/>
+          <mat-error style="color: #931a0e" *ngIf="createAccountForm.get('email')?.hasError('required') && createAccountForm.get('email')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createAccountForm.get('email')?.hasError('required') || createAccountForm.get('email')?.hasError('passwordMismatch')) && (createAccountForm.get('email')?.touched || createAccountForm.get('email')?.dirty)">
+          {{ 'global.required' | translate }}
+        </p>
+      </div>
+      <div class="row-control"  style="position: relative">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>{{ 'global.username' | translate }}</mat-label>
+          <input matInput placeholder="{{ 'global.username' | translate }}" formControlName="username" />
+          <mat-error style="color: #931a0e" *ngIf="createAccountForm.get('username')?.hasError('required') && createAccountForm.get('password')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createAccountForm.get('username')?.hasError('required') || createAccountForm.get('username')?.hasError('passwordMismatch')) && (createAccountForm.get('username')?.touched || createAccountForm.get('username')?.dirty)">
+          {{ 'global.required' | translate }}
+        </p>
+      </div>
+
+      <div class="row-control" style="position: relative">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>{{'global.password' | translate}}</mat-label>
+          <input matInput placeholder="{{ 'global.password' | translate }}" formControlName="password" [type]="hidePassword ? 'password' : 'text'"/>
+          <button class="btnEye" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <p style="color: #931a0e; position: absolute; left: 38px; top: 56px" *ngIf="(createAccountForm.get('password')?.hasError('required') || createAccountForm.get('password')?.hasError('passwordMismatch')) && (createAccountForm.get('password')?.touched || createAccountForm.get('password')?.dirty)">
+          {{ 'global.required' | translate }}
+        </p>
+      </div>
+
+      <button style="background-color: #007bff; color: #fff" [disabled]="!createAccountForm.valid" mat-button type="submit">Submit</button>
+    </form>
+  </section>
+</div>

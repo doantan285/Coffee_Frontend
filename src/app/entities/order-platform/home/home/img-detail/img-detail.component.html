@@ -1,0 +1,6 @@
+<div class="imgDetail" (click)="changeImage('left')" (contextmenu)="changeImage('right')">
+  <img [src]="img" alt="" (mouseover)="showArrows = true" (mouseleave)="showArrows = false">
+  <span class="arrow-left" (click)="changeImage('left')">&#8249;</span>
+  <span class="arrow-right" (click)="changeImage('right')">&#8250;</span>
+</div>
+

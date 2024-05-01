@@ -1,0 +1,15 @@
+<!--<button (click)="exportToPdf()">Export to PDF</button>-->
+<app-share-manage
+  [order]="true"
+  [columns]="column"
+  [rowData]="dataOrders"
+  [loading]="loading"
+  [noData]="noData"
+  (export)="exportToPdf($event)"
+  (clearValueSearch)="clearValueSearch()"
+  (searchValue)="onSearch($event)"
+  (updateRow)="updateRow($event)"
+></app-share-manage>
+
+
+

@@ -1,0 +1,13 @@
+<app-share-manage
+  [products]="true"
+  [columns]="columns"
+  [rowData]="dataProducts"
+  [loading]="loading"
+  [noData]="noData"
+  [clearSearchProduct]="clearSearchProduct"
+  (clearValueSearch)="clearValueSearch($event)"
+  (searchValue)="onSearch($event)"
+  (categoryProduct)="categoryProduct($event)"
+  (updateRow)="updateRow($event)"
+  (OnRefresh)="refresh($event)"
+></app-share-manage>

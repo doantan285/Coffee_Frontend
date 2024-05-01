@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div class="content">
+  <section class="order">
+    <div class="order__left col-6">
+      <div class="order__left--img ">
+        <img src="{{data.image_url}}" alt="{{data.name}}">
+      </div>
+    </div>
+    <div class="order__right col-6">
+      <h1>{{data.name}}</h1>
+      <p><span style="font-weight: bold; color: #5e1f18">{{'manage.category' | translate}} :</span> {{data.category}}</p>
+      <p> <span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.price' | translate}} : </span>{{data.price | currency:'VND'}}</p>
+      <p style="line-height: 1.6"><span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.description' | translate}} :</span> {{data.description}}</p>
+<!--      <div class="quantity-control">-->
+<!--        <button class="quantity-btn"-->
+<!--                (click)="decreaseQuantity(data)" [disabled]="data.total === 1">-</button>-->
+<!--        <span class="quantity-text" style="margin: 0 8px;font-weight: bold;">{{data.total}}</span>-->
+<!--        <button class="quantity-btn"-->
+<!--                (click)="increaseQuantity(data)">+</button>-->
+<!--        <button mat-button class="btn_order" (click)="orderProduct()">Đặt Hàng</button>-->
+<!--      </div>-->
+
+    </div>
+  </section>
+  <section class="detail__comment">
+    <div class="comment__btn">
+      <form [formGroup]="formComment" (ngSubmit)="comment()">
+        <mat-form-field class="input__comment">
+          <input class="input" formControlName="commentValue" type="email" [(ngModel)]="commentValue" matInput>
+        </mat-form-field>
+        <button mat-button class="comment" type="submit" [ngStyle]="{'background-color': commentValue ? '#5e1f18' : '#8a544e'}" [disabled]="!commentValue">
+          {{'global.comment' | translate}}
+        </button>
+      </form>
+    </div>
+    <section class="commnet__content">
+      <div class="itemcomment" *ngFor="let item of commentList">
+        <div class="comment__left">
+          <div class="user">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="itemcomment__content">
+            <section class="time__comment">
+              {{item.timestamp}}
+            </section>
+            <section>
+              <p style="margin: 0">{{item.content}}</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</div>
+<app-scroll-top></app-scroll-top>
+<app-footer></app-footer>

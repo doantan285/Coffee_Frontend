@@ -1,0 +1,12 @@
+<app-share-manage
+  [tables]="true"
+  [rowData]="dataTale"
+  [loading]="loading"
+  [noData]="noData"
+  (Detail)="tableDetail($event)"
+  (searchValue)="onSearch($event)"
+  (clearValueSearch)="clearValueSearch($event)"
+  (OnRefresh)="refresh($event)"
+  (updateRow)="updateRow($event)"
+></app-share-manage>
+

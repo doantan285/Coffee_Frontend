@@ -1,0 +1,138 @@
+<app-header></app-header>
+  <div class="content">
+    <section class="about">
+        <div class="about__left col-6">
+          <div class="about__left__content">
+            <div class="about__heading">
+              <h1>chúng tôi là</h1>
+              <span style="text-transform: uppercase">coffee point</span>
+              <p>Thứ hai đến Thứ bảy 8:30am - 11:00pm | Hotline: 19006750</p>
+            </div>
+            <div class="about__text">
+              <p>Chúng tôi đi khắp thế giới để tìm kiếm cà phê tuyệt vời. Trong quá trình đó, chúng tôi phát hiện ra những hạt đậu đặc biệt và hiếm đến nỗi chúng tôi có thể chờ đợi để mang chúng về.</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="about__right col-6">
+          <div class="about__right--img">
+            <img src="./assets/img/about.png" alt="cốc cà phê">
+          </div>
+        </div>
+    </section>
+    <section class="menu">
+      <div class="menu__content">
+        <h2>Thực đơn hôm nay</h2>
+        <div class="menu__btn">
+          <button mat-button [ngClass]="{'active': coffee}" (click)="handleMenu('coffee')">coffee</button>
+          <button mat-button [ngClass]="{'active': cakes}" (click)="handleMenu('cakes')">cakes</button>
+          <button mat-button [ngClass]="{'active': snack}"  (click)="handleMenu('snack')">snack</button>
+        </div>
+        <section style="display: flex; justify-content: center">
+          <div *ngIf="coffee" class="menu__content--list">
+            <div *ngFor="let item of top10coffee" class="menu__content--item" (click)="handleOrder(item)">
+              <div class="menu__item--img">
+                <img src="{{item.image_url}}" alt="cà phê">
+              </div>
+              <div class="menu__item--content">
+                <span>{{item.name}}</span>
+                <p>{{item.description}}</p>
+              </div>
+              <div class="price">
+                <span>{{ item.price | currency:'VND' }}</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="cakes" class="menu__content--list">
+            <div class="menu__content--item" *ngFor="let item of top10cakes">
+              <div class="menu__item--img">
+                <img src="{{item.image_url}}" alt="cà phê">
+              </div>
+              <div class="menu__item--content">
+                <span>{{item.name}}</span>
+                <p>{{item.description}}</p>
+              </div>
+              <div class="price">
+                <span>{{ item.price | currency:'VND' }}</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="snack" class="menu__content--list">
+            <div class="menu__content--item" *ngFor="let item of top10snack">
+              <div class="menu__item--img">
+                <img src="{{item.image_url}}" alt="cà phê">
+              </div>
+              <div class="menu__item--content">
+                <span>{{item.name}}</span>
+                <p>{{item.description}}</p>
+              </div>
+              <div class="price">
+                <span>{{ item.price | currency:'VND' }}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="menu__more">
+          <button mat-button
+                  [routerLink]="['/menu']"
+                  [queryParams]="{ filter: coffee ? 'coffee': snack ? 'snack' : 'cakes'}"
+          >
+            show more
+          </button>
+        </section>
+      </div>
+    </section>
+    <section class="bartending">
+      <img src="./assets/img/home_icon/bg_hours_book.webp" alt="">
+      <div class="bartending__content">
+        <h1>hình ảnh của quán</h1>
+        <div class="bartending__content--listImg">
+          <div class="bartending__content--col-left col_left">
+            <div>
+              <img (click)="detailImg('1')" src="./assets/img/imgHome/1.webp" alt="ảnh của quán">
+            </div>
+          </div>
+          <div class="bartending__content--col-right col_right">
+            <div>
+              <img (click)="detailImg('2')"  src="./assets/img/imgHome/2.webp" alt="ảnh của quán">
+            </div>
+            <div>
+              <img (click)="detailImg('3')"  src="./assets/img/imgHome/3.webp" alt="ảnh của quán">
+            </div>
+            <div>
+              <img (click)="detailImg('4')"  src="./assets/img/imgHome/4.webp" alt="ảnh của quán">
+            </div>
+            <div>
+              <img (click)="detailImg('5')"  src="./assets/img/imgHome/5.webp" alt="ảnh của quán">
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <section class="list__icon">
+      <div style="width: 1600px; display: flex;justify-content: end">
+        <div class="list__icon--item">
+          <div class="list__icon--item--img">
+            <img src="./assets/img/home_icon/service_1.webp" alt="ảnh">
+          </div>
+          <span class="title_service">Coffee chất lượng hàng <br> đầu của Châu Âu</span>
+        </div>
+        <div class="list__icon--item">
+          <div class="list__icon--item--img">
+            <img src="./assets/img/home_icon/service_2.png" alt="ảnh">
+          </div>
+          <span class="title_service">Coffee chất lượng hàng <br> đầu của Châu Âu</span>
+        </div>
+        <div class="list__icon--item">
+          <div class="list__icon--item--img">
+            <img src="./assets/img/home_icon/service_3.webp" alt="ảnh">
+          </div>
+          <span class="title_service">Coffee chất lượng hàng <br> đầu của Châu Âu</span>
+        </div>
+      </div>
+
+    </section>
+  </div>
+<app-footer></app-footer>

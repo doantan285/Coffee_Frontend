@@ -1,0 +1,33 @@
+
+<div class="edit_paid">
+  <button class="closeEdit" (click)="closeDialog()">
+    <i class="fas fa-times" style="color: #5e1f18"></i>
+  </button>
+  <h1 class="edit__heading" *ngIf="data.isDeleteOne || data.isDelete">
+    {{'manage.orders.deleteOrders' | translate}}
+  </h1>
+  <h1  class="edit__heading" *ngIf="data.isPaid || data.isUnPaid || data.isShipping" >
+    {{'manage.orders.changeStatus' | translate}}
+  </h1>
+  <section class="edit__option" *ngIf="data.isPaid || data.isUnPaid || data.isShipping" style="margin-left: 100px">
+    <form [formGroup]="checkboxForm">
+      <mat-radio-group formControlName="option" style="display: flex; flex-direction: column">
+        <mat-radio-button value="isPaid">{{'manage.orders.paid' | translate}}</mat-radio-button>
+        <mat-radio-button value="isUnPaid">{{'manage.orders.unpaid' | translate}}</mat-radio-button>
+        <mat-radio-button value="isShipping">{{'manage.orders.shipping' | translate}}</mat-radio-button>
+      </mat-radio-group>
+    </form>
+  </section>
+
+  <section class="edit__btn" [ngStyle]="{'margin-top': (data.isPaid || data.isUnPaid || data.isShipping) ? '40px' : '0' }">
+    <button (click)="closeDialog()" class="edit__cancel btn"  mat-button>
+      {{'manage.orders.cancel' | translate}}
+    </button>
+    <button *ngIf="data.isDeleteOne || data.isDelete" (click)="deleteOrders(data)" class="edit__oke btn" mat-button>
+      {{'manage.orders.delete' | translate}}
+    </button>
+    <button (click)="editStatus(checkboxForm.value, data)" *ngIf="data.isPaid || data.isUnPaid || data.isShipping" [disabled]="isEditButtonEnabled" class="edit__oke btn" mat-button >
+      {{'manage.orders.edit' | translate}}
+    </button>
+  </section>
+</div>

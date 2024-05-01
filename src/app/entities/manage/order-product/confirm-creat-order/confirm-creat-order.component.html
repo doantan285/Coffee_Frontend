@@ -1,0 +1,55 @@
+<header>
+    <h1 style="text-transform: uppercase">xác nhận đơn hàng</h1>
+  <button class="close" (click)="close()"><i class="fas fa-times"></i></button>
+
+</header>
+<div class="product">
+  <h2 *ngIf="oldOrder.length >= 1">
+    {{'global.addOrder' | translate}} : {{table}}
+  </h2>
+  <div class="product__list">
+    <div *ngFor="let item of data; let i = index" class="product__list--item">
+      <p class="name">
+        {{i+1}}:
+        {{item.name}}
+      </p>
+      <p class="total">
+        <span>{{'manage.orders.total' | translate}}: </span>
+        {{item.total}}
+      </p>
+      <p class="price">
+        <span>{{'manage.orders.price' | translate}}: </span>
+        {{item.price * item.total | currency:'VND'}}
+      </p>
+    </div>
+
+  </div>
+  <div style="margin: 30px 0; font-weight: bold; display: flex; justify-content: space-between">
+    <div style="font-size: 22px">
+      {{'manage.orders.tableNumber' | translate}} : {{table}}
+    </div>
+    <div style="font-size: 22px">
+      {{'manage.orders.tol' | translate}}: {{totalPrice | currency:'VND'}}
+    </div>
+  </div>
+  <section class="customer">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="row-control">
+        <mat-form-field appearance="outline" style="margin-bottom: 20px!important; height: 60px!important; width: 100%!important;">
+          <mat-label>{{'manage.orders.nameCustom' | translate}}</mat-label>
+          <input style="padding: 0 20px" matInput placeholder="{{'manage.orders.nameCustom' | translate}}..." formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline" style="margin-bottom: 20px!important; height: 60px!important; width: 100%!important;">
+          <mat-label>{{'manage.orders.note' | translate}}</mat-label>
+          <input style="padding: 0 20px" matInput placeholder="ghi chú" formControlName="note" />
+        </mat-form-field>
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button mat-button style="padding :24px; background-color: #007bff ; color: #fff" type="submit">{{'manage.orders.status' | translate}}</button>
+
+      </div>
+    </form>
+  </section>
+</div>

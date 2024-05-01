@@ -1,0 +1,17 @@
+<div class="edit_paid">
+  <button class="closeEdit" (click)="closeDialog()">
+    <i class="fas fa-times" style="color: #5e1f18"></i>
+  </button>
+  <h1 class="edit__heading">
+    {{data.type === 3 ? ('manage.manageTable.deleteTable' | translate) : ('manage.manageTable.addTables' | translate ) }}
+  </h1>
+
+  <section class="edit__btn" >
+    <button (click)="closeDialog()" class="edit__cancel btn" mat-button>
+      {{'manage.orders.cancel' | translate}}
+    </button>
+    <button (click)="delete(data)" class="edit__oke btn" mat-button>
+      {{data.type=== 4? ('manage.manageTable.add' | translate) : ('manage.orders.delete' | translate)}}
+    </button>
+  </section>
+</div>

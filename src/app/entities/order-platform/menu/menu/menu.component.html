@@ -1,0 +1,83 @@
+<app-header
+  [menuOrder]="true"
+  (searchValue)="onSearch($event)"
+  (clearValueSearch)="clearValueSearch($event)"
+></app-header>
+<div class="menu__option">
+    <button mat-button [ngClass]="{'active': coffee}" (click)="handleMenu('coffee')">coffee</button>
+    <button mat-button [ngClass]="{'active': cakes}" (click)="handleMenu('cakes')">cakes</button>
+    <button mat-button [ngClass]="{'active': snacks}"  (click)="handleMenu('snacks')">snack</button>
+</div>
+<div class="menu">
+  <section *ngIf="coffee" class="menu__list">
+    <h1 class="menu__heading">{{'manage.coffee' | translate}}</h1>
+    <p class="menu__text">Sự kết hợp hoàn hảo giữa hạt cà phê Robusta & Arabica thượng hạng được trồng trên những vùng cao nguyên Việt Nam màu mỡ, qua những bí quyết rang xay độc đáo, Coffee Point chúng tôi tự hào giới thiệu những dòng sản phẩm Cà phê mang hương vị đậm đà và tinh tế.</p>
+    <div class="menu__list--content" style="display: flex">
+      <div class="menu__list--item" *ngFor="let item of dataCoffee">
+        <div class="card" style="width: 18rem">
+          <div style="height: 200px">
+            <img src="{{item.image_url}}" class="card-img-top" alt="image_url">
+          </div>
+          <div class="card-body">
+            <h3 style="font-weight: bold; color: #5e1f18" class="card-title">{{item.name}}</h3>
+            <h3 style="font-weight: bold"><span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.price' | translate}}: </span>{{item.price | currency:'VND'}}</h3>
+            <p class="card-text"> <span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.description' | translate}}: </span>{{item.description}}</p>
+            <div style="display: flex; justify-content: center">
+              <button class="btn btn-primary" (click)="handleOrder(item)">chi tiết</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nodata" *ngIf="nodata">
+      <img src="assets/img/no-data.svg" alt="nodata">
+      <h2>{{'global.nodata'| translate}}</h2>
+    </div>
+  </section>
+  <section *ngIf="cakes" class="menu__list">
+    <h1 class="menu__heading">{{'manage.cake' | translate}}</h1>
+    <p class="menu__text">Sự kết hợp hoàn hảo giữa hạt cà phê Robusta & Arabica thượng hạng được trồng trên những vùng cao nguyên Việt Nam màu mỡ, qua những bí quyết rang xay độc đáo, Coffee Point chúng tôi tự hào giới thiệu những dòng sản phẩm Cà phê mang hương vị đậm đà và tinh tế.</p>
+    <div class="menu__list--content" style="display: flex">
+      <div class="menu__list--item" *ngFor="let item of dataCakes">
+        <div class="card" style="width: 18rem;">
+          <div style="height: 200px">
+            <img src="{{item.image_url}}" class="card-img-top" alt="image_url">
+          </div>
+
+          <div class="card-body">
+            <h3 style="font-weight: bold; color: #5e1f18" class="card-title">{{item.name}}</h3>
+            <h3 style="font-weight: bold"><span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.price' | translate}}: </span>{{item.price | currency:'VND'}}</h3>
+            <p class="card-text"><span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.description' | translate}}: </span>{{item.description}}</p>
+            <div style="display: flex; justify-content: center">
+              <button class="btn btn-primary" (click)="handleOrder(item)">chi tiết</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section *ngIf="snacks" class="menu__list">
+    <h1 class="menu__heading">{{'manage.snacks' | translate}}</h1>
+    <p class="menu__text">Sự kết hợp hoàn hảo giữa hạt cà phê Robusta & Arabica thượng hạng được trồng trên những vùng cao nguyên Việt Nam màu mỡ, qua những bí quyết rang xay độc đáo, Coffee Point chúng tôi tự hào giới thiệu những dòng sản phẩm Cà phê mang hương vị đậm đà và tinh tế.</p>
+    <div class="menu__list--content" style="display: flex">
+      <div class="menu__list--item" *ngFor="let item of dataSnacks">
+        <div class="card" style="width: 18rem;">
+          <div style="height: 200px">
+            <img src="{{item.image_url}}" class="card-img-top" alt="image_url">
+          </div>
+
+          <div class="card-body">
+            <h3 style="font-weight: bold; color: #5e1f18" class="card-title">{{item.name}}</h3>
+            <h3 style="font-weight: bold"><span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.price' | translate}}: </span>{{item.price | currency:'VND'}}</h3>
+            <p class="card-text"><span style="font-weight: bold; color: #5e1f18">{{'manage.manageProduct.description' | translate}}: </span>{{item.description}}</p>
+            <div style="display: flex; justify-content: center">
+              <button class="btn btn-primary" (click)="handleOrder(item)">{{'manage.viewDetail' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<app-scroll-top></app-scroll-top>
+<app-footer></app-footer>

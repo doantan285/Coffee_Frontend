@@ -1,0 +1,162 @@
+{
+  "global": {
+    "addOrder": "Add product to table",
+    "mon": "products",
+    "add": "add",
+    "manage": "Admin",
+    "employee": "Employee",
+    "searchProduct": "Search product",
+    "home": "Home",
+    "menu": "menu",
+    "about": "about",
+    "comment": "Comment",
+    "required" : "Do not abandon this field",
+    "nodata": "No Data",
+    "totals": "Totals",
+    "all": "All",
+    "Selected": "Selected",
+    "search": "Search",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "lang": "EN",
+    "idUser" : "User ID: ",
+    "email" : "Email",
+    "position": "Position",
+    "login": "Log In",
+    "save": "Save",
+    "logout": "Sign Out",
+    "changePassword": "Change Password",
+    "username": "UserName",
+    "password": "PassWord",
+    "newPassword": "New PassWord",
+
+    "confirmPassword": "Confirm Password",
+    "vldusername": "Please enter account !",
+    "vldpassword": "Please enter a password !"
+  },
+
+  "tableManage": {
+  },
+  "manage": {
+    "Choose": "Choose products for the table",
+    "viewDetail": "View Detail",
+    "overview": "overview",
+    "orderEmpty": "Empty Order",
+    "missingImg": "Please Select Photo",
+    "changeProduct": "Edit Product",
+    "category":"Category",
+    "totalRevenue": "Total Revenue",
+    "addAccount": "Add Account",
+    "addUser": "Add User",
+    "placeholderCoffee": "Search ID Coffee, Name Coffee",
+    "placeholderCake": "Search ID Cake, Name Cake ",
+    "placeholderOrder": "Search ID Order, ID table",
+    "placeholderSnacks": "Search ID Snacks , Name Snacks",
+    "placeholderRevenue": "Search ID Order, ID table",
+    "placeholderAccount": "Search ID Account, Name Account",
+    "placeholderProduct": "Search ID Product, Name Product",
+    "placeholderUser": "Search Name Employee, ID Employee, Email, Role",
+    "placeholderTable": "Search Table ",
+    "action": "Action",
+    "coffee": "coffee",
+    "snacks": "snacks",
+    "order": "order",
+    "cake": "cake",
+    "revenue": "revenue",
+    "users": "users",
+    "products": "Products",
+    "tables": "table",
+    "product": "product",
+    "account": "account",
+    "manageProduct":{
+      "changeDes": "Description... ",
+      "description": "Description",
+      "price": "Price",
+      "idProduct":"ID Product",
+      "nameProduct": "Name Product",
+      "deleteProduct": "Delete Product",
+      "createProduct": "Create Product"
+    },
+    "orders": {
+      "sameChangeStatus": "Please select an order with the same status to change!",
+      "number": "number",
+      "tableNumber": "Table Number",
+      "detailOrder": "Detail Order",
+      "nameCustom": "Customer name",
+      "statuss": "Status",
+      "note": "Note",
+      "price": "Price",
+      "total": "Total",
+      "tol": "Total price",
+
+      "totals": "Amount",
+      "edit": "Edit",
+      "changeStatus": "Change Status",
+      "actionCancel": "Cancel Orders",
+      "cancel": "Cancel",
+      "save": "Save",
+      "deleteOrders": "Delete Orders",
+      "id": "ID Orders",
+      "table": "table",
+      "tables": "table",
+      "products": "products",
+      "orderTime": "Time order",
+
+      "status": "confirm",
+      "delete": "Delete",
+      "paid": "Paid",
+      "unpaid": "Order",
+      "shipping": "Shipping"
+    },
+    "revenues": {
+      "totalRevenue": "Total Revenue",
+      "customer_name": "Customer Name"
+    },
+
+    "manageAccount": {
+      "create": "Create Account",
+      "edit": "Edit Account",
+      "delete": "Delete Account",
+      "passwordMismatch": " Password and Confirm Password do not match.",
+      "id": "ID User",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "img": "Img",
+      "role": "Role",
+      "action": "Action"
+    },
+    "manageUser": {
+      "createUser": "Create User",
+
+      "delete": "Delete User",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "hire_date": "Hire_Date",
+      "role": "Role",
+      "action": "Action"
+    },
+
+    "manageTable": {
+      "listOrder": "List of selected items",
+      "add": "Add",
+      "deleteTable": "Delete Table",
+      "nameCustomer": "Name Customer",
+      "addTables": "Add table",
+      "tableId": "Table ID",
+      "orderId": "Order ID",
+      "timeOrder": "Time Order",
+      "nameProduct": "Name Products",
+      "price": "Price",
+      "note": "Note"
+    }
+  },
+  "header": {
+
+  },
+  "footer": {
+
+  }
+}

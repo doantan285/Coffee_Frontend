@@ -1,0 +1,165 @@
+<mat-drawer-container class="example-container" style="margin: 0; border: none" autosize>
+  <mat-drawer #drawer class="example-sidenav sidenav" style="min-width: 300px" mode="side" opened="true">
+    <div class="listBtn">
+      <div class="logo" routerLink="/manage">
+        <img src="./assets/img/logo.png" alt="logo">
+      </div>
+      <button *ngIf="localStorage.getItem('role') === 'admin'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/manage">{{'manage.overview' | translate}}</button>
+      <button [routerLinkActive]="['active']" [routerLink]="['/manage/order']" [routerLinkActiveOptions]="{ exact: true }"> {{'manage.order' | translate}}</button>
+      <button *ngIf="localStorage.getItem('role') !== 'admin'" [routerLinkActive]="['active']" [routerLink]="['/manage/employOrder']" [routerLinkActiveOptions]="{ exact: true }"> {{'manage.orderEmpty' | translate}}</button>
+      <button routerLinkActive="active" routerLink="/manage/products">{{'manage.products' | translate}}</button>
+      <button *ngIf="localStorage.getItem('role') === 'admin'" routerLinkActive="active" routerLink="/manage/revenue">{{'manage.revenue' | translate}}</button>
+      <button *ngIf="localStorage.getItem('role') === 'admin'" routerLinkActive="active" routerLink="/manage/account">{{'manage.account' | translate}}</button>
+      <button routerLinkActive="active" routerLink="/manage/users">{{'manage.users' | translate}}</button>
+      <button *ngIf="localStorage.getItem('role') === 'admin'" routerLinkActive="active" routerLink="/manage/table">{{'manage.tables' | translate}}</button>
+    </div>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <section class="header">
+      <section class="navbar">
+        <button class="btn__navbar" type="button" mat-button (click)="toggle()">
+          <i class="fas fa-bars iconBar"></i>
+        </button>
+        <span></span>
+      </section>
+      <section class="lang">
+        <button class="lang--btn" (click)="handleLang()">{{'global.lang' | translate}}</button>
+        <div class="account">
+          <button class="account__btn" [matMenuTriggerFor]="menu">
+            <div class="imgAccount" style="width: 30px; height: 30px; border-radius: 50%; overflow: hidden; border: 2px solid #5e1f18">
+              <img style="width: 100% ; height: 100%" src="{{this.imgAccount}}" alt="img">
+            </div>
+          </button>
+          <mat-menu class="account__menu" #menu="matMenu">
+            <div (click)="$event.stopPropagation()" style=" background-color: #f2f2f3; border-bottom: 1px solid #ccc; padding: 20px" >
+              <div style="display: flex; align-items: center">
+                <div class="imgAccount" style="width: 30px; height: 30px; border-radius: 50%; overflow: hidden;border: 2px solid #5e1f18; margin-right: 20px">
+                  <img style="width: 100% ; height: 100%" src="{{this.imgAccount}}" alt="img">
+                </div>
+                <h3 style="font-weight: bold; font-size: 24px; margin: 0"> {{username}}</h3>
+              </div>
+              <hr>
+              <p>Email: {{this.emailUser}}</p>
+              <p>{{'global.idUser' | translate}} {{this.user_id}}</p>
+              <p>{{'global.position' | translate}}: {{this.userPosition}}</p>
+            </div>
+            <div class="loginOut">
+              <button class="signOut" (click)="changePassword()" style="height: 60px; border-bottom: 1px solid #ccc" mat-menu-item><i style="margin-right: 14px" class="far fa-edit"></i>{{ 'global.changePassword' | translate}}</button>
+              <button class="signOut" style="height: 60px" mat-menu-item (click)="signOut()"><i style="margin-right: 14px" class="fas fa-sign-out-alt"></i>{{ 'global.logout' | translate}}</button>
+            </div>
+          </mat-menu>
+        </div>
+      </section>
+    </section>
+    <section class="content">
+      <div class="search" *ngIf="!overview">
+        <div style="display: flex; align-items: center">
+          <section *ngIf="account || users && localStorage.getItem('role')==='admin' " class="addAccount" style="margin-right: 40px">
+            <button mat-button style="min-width: 180px" (click)="createAccount()">
+              {{account ? ('manage.addAccount' | translate) : ('manage.addUser' | translate) }}
+            </button>
+          </section>
+          <section *ngIf="revenue">
+            <mat-form-field class="example-form-field">
+              <mat-date-range-input [rangePicker]="rangePicker" >
+                <input matStartDate [(ngModel)]="time_gte" style="color: #000" placeholder="dd/mm/yyy">
+                <input matEndDate [(ngModel)]="time_lte" style="color: #000" placeholder="dd/mm/yyyy">
+              </mat-date-range-input>
+
+              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+
+              <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions >
+                  <button (click)="clearDateTime()" mat-button matDateRangePickerCancel>{{'global.delete' | translate}}</button>
+                  <button mat-button matDateRangePickerCancel>{{'global.cancel' | translate}}</button>
+                  <button (click)="submitDateTime()" mat-raised-button color="primary" matDateRangePickerApply>{{'global.apply' | translate}}</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
+          </section>
+        </div>
+
+        <div style="display: flex ; align-items: center"
+             *ngIf="!overview"
+             [ngStyle]="{'width': revenue ? '700px' : '100%'}"
+        >
+          <div class="form" [ngStyle]="{'width': revenue ? '700px' : '100%'}">
+            <i class="fas fa-search"></i>
+            <input type="text"
+                   class="form-control
+                   form-input"
+                   [(ngModel)]="search"
+                   (ngModelChange)="onSearchChange($event)"
+                   placeholder="{{
+                   order ? ('manage.placeholderOrder' | translate) :
+                   revenue ? ('manage.placeholderRevenue' | translate) :
+                   account ? ('manage.placeholderAccount' | translate) :
+                   products || orderProduct ? ('manage.placeholderProduct' | translate) :
+                   users ? ('manage.placeholderUser' | translate) :
+                   tables ? ('manage.placeholderTable' | translate) :
+                   emptyOrder ? ('manage.placeholderTable' | translate) :
+                   ''}}"
+                   (keypress)="onKeyPress($event)"
+            >
+            <span
+              class="search__close"
+              style="cursor: pointer"
+              [ngStyle]="{ 'display': !isValidSearchTerm() ? 'none' : 'flex' }"
+              (click)="clearSearchValue()"
+            >
+              <i
+                class="fas fa-times"
+              ></i>
+            </span>
+          </div>
+          <button
+            class="btn__submit--search"
+            style="min-width: 110px"
+            mat-raised-button
+            type="submit"
+            [disabled]="!isValidSearchTerm()"
+            [ngStyle]="{ 'backgroundColor': !isValidSearchTerm() ? '#6c6262' : '#5e1f18'}"
+            (click)="onSearch()"
+          >
+            {{'global.search'| translate}}
+
+          </button>
+        </div>
+
+      </div>
+      <section class="table">
+        <app-table *ngIf="overview || order || products ||  revenue || account || users || tables || emptyOrder || orderProduct"
+          [columns]="columns"
+          [rowData]="rowData"
+                   (onRefresh)="refresh($event)"
+                   (updateRow)="updateRowShare($event)"
+                   (categoryProduct)="categoryProductShare($event)"
+                   (tableDetail)="tableDetail($event)"
+                   (detailTableEmptyOrder)= "tableDetailEmpty($event)"
+                   (export)="exportOrder($event)"
+                   (orderEmpty)="orderEmpty($event)"
+                   [loading] = "loading"
+                   [orderSuc] = "orderSuc"
+                   [noData] = "noData"
+                   [order] = "order"
+                   [overview] = "overview"
+                   [tableNumber]="tableNumber"
+                   [emptyOrder] = "emptyOrder"
+                   [products] = "products"
+                   [revenue]="revenue"
+                   [orderProduct]="orderProduct"
+                   [account]="account"
+                   [totalRevenue]="totalRevenue"
+                   [users]="users"
+                   [tables]="tables"
+        >
+        </app-table>
+      </section>
+
+    </section>
+
+  </div>
+
+</mat-drawer-container>
+
+

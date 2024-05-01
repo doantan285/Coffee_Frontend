@@ -1,0 +1,39 @@
+.imgDetail {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  img{
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.arrow-left,
+.arrow-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  opacity: 0;
+  transition: transform 0.3s ease;
+  &:hover{
+    transform: scale(1.4);
+  }
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+.imgDetail:hover .arrow-left,
+.imgDetail:hover .arrow-right {
+  opacity: 1;
+}
+

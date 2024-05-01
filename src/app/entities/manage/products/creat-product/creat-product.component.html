@@ -1,0 +1,84 @@
+<div class="editProduct" *ngIf="data.type === 3 || data.type === 4">
+  <section class="header">
+    <div class="bookmark" *ngIf="data.type === 3">
+      <button class="outStock" (click)="bookmark(product)">
+        <i *ngIf="product.InStock === '1'" class="fas fa-bookmark"></i>
+        <i *ngIf="product.InStock === '0'" class="far fa-bookmark"></i>
+      </button>
+    </div>
+    <h1 *ngIf="data.type === 4">{{'manage.manageProduct.createProduct' | translate}}</h1>
+    <h1 *ngIf="data.type === 3">{{'manage.changeProduct' | translate}} : {{product.name}}</h1>
+    <button class="close" (click)="close()"><i class="fas fa-times"></i></button>
+  </section>
+
+  <section class="content">
+    <section class="content__left">
+      <div class="content__left--img">
+        <button *ngIf="imageUrl " class="content__left--img-close" (click)="closeImg()"><i class="fas fa-times"></i></button>
+        <div class="imgMising" *ngIf="missingImg && !imageUrl">
+          <span style="color: #fff">{{'manage.missingImg' | translate}}</span>
+        </div>
+        <div class="imgMising" *ngIf="imageUrl === ''">
+          <span style="color: #fff">{{'manage.missingImg' | translate}}</span>
+        </div>
+        <div>
+          <img width="100%" *ngIf="imageUrl" [src]="imageUrl" class="image">
+        </div>
+
+      </div>
+      <div class="content__left--input" style="height: 50px">
+        <input style="height: 50px" type="file" (change)="handleFileInput($event)" class="form-control"/>
+      </div>
+    </section>
+    <section class="content__right">
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="row-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'manage.manageProduct.nameProduct' | translate}}</mat-label>
+            <input matInput placeholder="{{'manage.manageProduct.nameProduct' | translate}}..." formControlName="nameproduct" />
+            <mat-error style="color: #931a0e" *ngIf="form.get('nameproduct')?.hasError('pattern') && form.get('price')?.touched">
+              {{'global.required' | translate}}
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+        <div *ngIf="data.type === 4" class="row-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'manage.category' | translate}}</mat-label>
+            <mat-select formControlName="category" placeholder="Choose a category">
+              <mat-option value="coffee">{{'manage.coffee' | translate}}</mat-option>
+              <mat-option value="cakes">{{'manage.cake' | translate}}</mat-option>
+              <mat-option value="snacks">{{'manage.snacks' | translate}}</mat-option>
+            </mat-select>
+            <mat-error  *ngIf="form.get('category')?.hasError('required')">Category is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'manage.orders.price' | translate}}</mat-label>
+            <input matInput placeholder="{{'manage.orders.price' | translate}}..." formControlName="price" />
+            <span class="currency">VNĐ</span>
+          </mat-form-field>
+          <mat-error style="color: #931a0e" *ngIf="form.get('price')?.hasError('pattern') && form.get('price')?.touched">
+            {{'manage.orders.number' | translate}}
+            </mat-error>
+        </div>
+        <div class="row-control">
+          <mat-form-field class="example-full-width" [ngStyle]="{'height': data.type === 3 ? '234px': '170px'}">
+            <mat-label>{{'manage.manageProduct.changeDes' | translate}}</mat-label>
+            <textarea style="height: 200px" formControlName="description" matInput placeholder="{{'manage.manageProduct.changeDes' | translate}}"></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </section>
+
+  </section>
+  <section class="footer">
+    <button mat-button style="margin-right: 20px">
+      {{'manage.orders.cancel' | translate}}
+    </button>
+    <button mat-button type="submit" (click)="submit()"  [disabled]="!this.form">
+      {{'manage.orders.save' | translate}}
+    </button>
+  </section>
+</div>

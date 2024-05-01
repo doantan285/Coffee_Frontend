@@ -1,0 +1,34 @@
+<header>
+  <button class="closeEdit" (click)="closeDialog()">
+    <i class="fas fa-times" style="color: #5e1f18"></i>
+  </button>
+  <h1> {{'manage.orders.detailOrder' | translate}} <span>{{data.order_id}}</span></h1>
+</header>
+<section class="content">
+ <div class="content__info">
+   <div><h3>{{'manage.orders.nameCustom' | translate}}:</h3> <span>{{data.customer_name ?data.customer_name : 'null' }}</span></div>
+   <div>
+     <h3> {{'manage.orders.tableNumber' | translate}}: </h3> <span>{{data.table_number}}</span>
+   </div>
+   <div>
+     <h3> {{'manage.orders.orderTime' | translate}}: </h3> <span>{{data.date_order}}</span>
+   </div>
+   <div>
+     <h3> {{'manage.orders.statuss' | translate}}: </h3> <span [ngStyle]="{'color': data.is_paid === '1' ? '#23af36': data.is_paid === '0'? '#e3220d': '#c99f32'}">{{data.is_paid === '1' ? ('manage.orders.paid' | translate) :data.is_paid === '0' ? ('manage.orders.unpaid' | translate) : ('manage.orders.shipping' | translate)}}</span>
+   </div>
+   <div>
+     <h3> {{'manage.orders.price' | translate}}: </h3> <span>{{data.total_amount | currency:'VND'}}</span>
+   </div>
+   <div>
+     <h3> {{'manage.orders.note' | translate}}: </h3> <span>{{data.note}}</span>
+   </div>
+
+ </div>
+  <section class="product__list">
+    <h2 style="font-weight: bold; text-transform: uppercase">{{'manage.orders.products' | translate}}</h2>
+    <div class="product__item" *ngFor="let pro of products; let i = index">
+      <span style="width: 240px">{{i+1}}: {{pro.name}}</span>
+      <span style="margin-left: 10px">{{'manage.orders.total' | translate}}: {{pro.total}}</span>
+    </div>
+  </section>
+</section>

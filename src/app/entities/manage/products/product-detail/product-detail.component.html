@@ -1,0 +1,73 @@
+<div class="detail" [ngStyle]="{'height': commentList.length == 0 ? '100%' : 'auto' }">
+  <section class="detail__content">
+    <section class="col_left">
+      <div class="col_left--img">
+        <img src="{{dataDetail.image_url}}" alt="ảnh">
+      </div>
+    </section>
+    <section class="col_right">
+      <div class="action">
+        <div>
+          <button class="outStock" (click)="bookmark()">
+            <i *ngIf="dataDetail?.InStock === '1'" class="fas fa-bookmark"></i>
+            <i *ngIf="dataDetail?.InStock === '0'" class="far fa-bookmark"></i>
+          </button>
+          <button *ngIf="localStorage.getItem('role')=== 'admin'" class="outStock" (click)="changeProduct()">
+            <i class="far fa-edit"></i>
+          </button>
+        </div>
+        <button class="lang--btn" (click)="handleLang()">{{'global.lang' | translate}}</button>
+      </div>
+      <div >
+        <h1 style="font-weight: bold; color: #5e1f18; font-size: 32px">{{'manage.manageProduct.nameProduct' | translate}}: {{dataDetail.name}}</h1>
+        <h2><span style="color: #5e1f18">{{'manage.category' | translate}}</span>: {{dataDetail.category}}</h2>
+        <h2><span  style="color: #5e1f18">{{'manage.manageProduct.price' | translate}}: </span>{{dataDetail.price | currency: 'VND'}}</h2>
+        <h2>{{'manage.manageProduct.description' | translate}}:</h2>
+        <p >{{dataDetail.description}}</p>
+      </div>
+
+    </section>
+  </section>
+  <section class="detail__comment">
+    <div class="comment__btn">
+      <form [formGroup]="formComment" (ngSubmit)="comment()">
+        <mat-form-field class="input__comment">
+          <input class="input" formControlName="commentValue" type="email" [(ngModel)]="commentValue" matInput>
+        </mat-form-field>
+        <button mat-button class="comment" type="submit" [ngStyle]="{'background-color': commentValue ? '#5e1f18' : '#8a544e'}" [disabled]="!commentValue">
+          {{'global.comment' | translate}}
+        </button>
+      </form>
+    </div>
+    <section class="commnet__content">
+      <div class="itemcomment" *ngFor="let item of commentList">
+        <div class="comment__left">
+          <div class="user">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="itemcomment__content">
+            <section class="time__comment">
+              {{item.timestamp}}
+            </section>
+            <section>
+              <p style="margin: 0">{{item.content}}</p>
+            </section>
+          </div>
+        </div>
+        <div *ngIf="localStorage.getItem('role') === 'admin'">
+          <button class="deletecomment" style="margin-right: 10px" (click)="deleteComment(item)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </section>
+  <div class="scroll-top" *ngIf="showScrollButton">
+    <button class="scroll-top-btn" (click)="scrollToTop()">
+      ^
+    </button>
+  </div>
+
+</div>

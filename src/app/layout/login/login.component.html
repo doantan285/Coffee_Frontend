@@ -1,0 +1,39 @@
+<div class="overlay"></div>
+<div class="login">
+  <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="login__form--content">
+      <h1 style="text-transform: uppercase; font-weight: bold; margin-bottom: 40px">{{'global.login'| translate}}</h1>
+      <div class="row-control">
+        <mat-form-field appearance="outline" style="margin-bottom: 20px!important; height: 60px!important; width: 100%!important;">
+          <mat-label>{{ 'global.username' | translate }}</mat-label>
+          <input style="padding: 0 20px" matInput placeholder="{{ 'global.username' | translate }}" formControlName="username" />
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline" style="height: 60px!important; width: 100%!important;">
+          <mat-label>{{'global.password' | translate }}</mat-label>
+          <input
+            style="padding: 0 20px"
+            type="{{ hidePassword ? 'password' : 'text' }}"
+            matInput
+            placeholder="{{'global.password' | translate }}"
+            formControlName="password"
+          />
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" style="top:6px; right: 2px">
+            <mat-icon style="font-size: 24px">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="row-control row-actions">
+        <button style="margin-right: -12px" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="loginForm.invalid">
+          {{'global.login'| translate}}
+        </button>
+      </div>
+      <div class="login__lang">
+        <button class="login__lang--btn" (click)="handleLang()">{{'global.lang' | translate}}</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+

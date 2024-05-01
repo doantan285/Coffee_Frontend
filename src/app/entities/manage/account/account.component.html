@@ -1,0 +1,10 @@
+<app-share-manage
+  [account] = "true"
+  [columns]="column"
+  [rowData]="dataAccount"
+  [loading]="loading"
+  [noData]="noData"
+  (updateRow)="updateRow($event)"
+  (searchValue)="onSearch($event)"
+  (addAccount)= "creatAccount($event)"
+></app-share-manage>

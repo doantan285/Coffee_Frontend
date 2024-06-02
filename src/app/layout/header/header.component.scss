@@ -1,6 +1,6 @@
 header{
   padding: 0 60px;
-  background-color: #b22830;
+  background-color: #000;
   //background-image: linear-gradient(to right, #b75348, #7e2a21, #b75348);
   display: flex;
   height: 100px;
@@ -59,7 +59,7 @@ header{
       width: 32px;
       border: none;
       border-radius: 50%;
-      background-color: #561a1a;
+      background-color: #915d0b;
       &:focus{
         outline: none;
       }
@@ -93,7 +93,7 @@ header{
     justify-content: center;
     align-items: center;
     .active{
-      background-color: #723232 !important;
+      background-color: #915d0b !important;
     }
     button{
       background-color: rgba(0,0,0,0);

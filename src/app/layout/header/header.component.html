@@ -1,45 +1,53 @@
 <header>
   <div class="navbar">
-    <button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      {{'global.home'| translate}}
+    <button
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ "global.home" | translate }}
     </button>
-    <button routerLink="/menu" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-            [class.active]="isMenuActive()">
-      {{'global.menu'| translate}}
+    <button
+      routerLink="/menu"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [class.active]="isMenuActive()"
+    >
+      {{ "global.menu" | translate }}
     </button>
-    <button routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      {{'global.about'| translate}}
+    <button
+      routerLink="/about"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ "global.about" | translate }}
     </button>
   </div>
   <div class="logo">
-    <img routerLink="/" src="./assets/img/logo.png" alt="logo">
+    <img routerLink="/" src="./assets/img/logo.png" alt="logo" />
   </div>
 
-  <div class="lang" [ngStyle]="{'justify-content': !menuOrder ? 'end' : ''}">
+  <div class="lang" [ngStyle]="{ 'justify-content': !menuOrder ? 'end' : '' }">
     <div class="form" *ngIf="menuOrder">
-      <input type="text"
-             class="form-control
-                   form-input"
-             [(ngModel)]="search"
-             (ngModelChange)="onSearchChange($event)"
-             placeholder="{{'global.searchProduct' | translate}}..."
-      >
+      <input
+        type="text"
+        class="form-control form-input"
+        [(ngModel)]="search"
+        (ngModelChange)="onSearchChange($event)"
+        placeholder="{{ 'global.searchProduct' | translate }}..."
+      />
       <button
         [disabled]="!search"
         class="search__close"
         style="cursor: pointer"
         (click)="clearSearchValue()"
       >
-              <i
-                class="fas fa-times"
-              ></i>
-            </button>
+        <i class="fas fa-times"></i>
+      </button>
     </div>
-    <button class="lang--btn" (click)="handleLang()">{{'global.lang' | translate}}</button>
-
+    <button class="lang--btn" (click)="handleLang()">
+      {{ "global.lang" | translate }}
+    </button>
   </div>
 </header>
-<section class="content">
-
-</section>
-
+<section class="content"></section>

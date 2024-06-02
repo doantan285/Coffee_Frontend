@@ -1,32 +1,144 @@
 <div class="container">
-  <section *ngIf="!overview" style="display: flex;height: 50px; border-radius: 12px;margin-bottom: 10px;padding: 0 20px; justify-content: space-between; background-color:#fff; align-items: center;">
+  <section
+    *ngIf="!overview"
+    style="
+      display: flex;
+      height: 50px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      padding: 0 20px;
+      justify-content: space-between;
+      background-color: #fff;
+      align-items: center;
+    "
+  >
     <div class="note__details">
-      <button mat-button style="font-weight: bold; color: #5e1f18;" *ngIf="orderProduct" (click)="back()"><i class="fas fa-arrow-left"></i> quay lại</button>
-      <span style="font-weight: bold; color: #007bff;" *ngIf="!orderProduct">{{'global.totals' | translate}}: {{totals}}</span>
-      <span *ngIf="products" style="font-weight: bold; color: #007bff;">{{titlePageProduct}}</span>
-      <span *ngIf="!products" style="font-weight: bold; color: #007bff;">{{'global.Selected'| translate}}: {{selectedAll ? ('global.all'| translate): totalSelect}}</span>
-      <span style="font-weight: bold; color: #931a0e" *ngIf="revenue"> {{'manage.revenues.totalRevenue' | translate}}: <span style="font-size: 16px ">{{totalRevenue | currency: 'VND'}}</span> </span>
+      <button
+        mat-button
+        style="font-weight: bold; color: #5e1f18"
+        *ngIf="orderProduct"
+        (click)="back()"
+      >
+        <i class="fas fa-arrow-left"></i> quay lại
+      </button>
+      <span style="font-weight: bold; color: #007bff" *ngIf="!orderProduct"
+        >{{ "global.totals" | translate }}: {{ totals }}</span
+      >
+      <span *ngIf="products" style="font-weight: bold; color: #007bff">{{
+        titlePageProduct
+      }}</span>
+      <span *ngIf="!products" style="font-weight: bold; color: #007bff"
+        >{{ "global.Selected" | translate }}:
+        {{ selectedAll ? ("global.all" | translate) : totalSelect }}</span
+      >
+      <span style="font-weight: bold; color: #931a0e" *ngIf="revenue">
+        {{ "manage.revenues.totalRevenue" | translate }}:
+        <span style="font-size: 16px">{{
+          totalRevenue | currency : "VND"
+        }}</span>
+      </span>
     </div>
-    <h1 *ngIf="orderProduct" style="margin-bottom: 0; font-weight: bold; color: #5e1f18">{{'manage.Choose' | translate}} {{tableNumber}}</h1>
+    <h1
+      *ngIf="orderProduct"
+      style="margin-bottom: 0; font-weight: bold; color: #5e1f18"
+    >
+      {{ "manage.Choose" | translate }} {{ tableNumber }}
+    </h1>
     <div *ngIf="!overview" style="display: flex; align-items: center">
-      <button style="background-color: #007bff;color: #fff; margin-right: 20px" *ngIf="tables && localStorage.getItem('role') === 'admin'" (click)="createProduct()" mat-button>{{'manage.manageTable.addTables' | translate}}</button>
-      <button style="background-color: #007bff;color: #fff; margin-right: 20px" *ngIf="products && localStorage.getItem('role')==='admin'" (click)="createProduct()" mat-button>{{'manage.manageProduct.createProduct' | translate}}</button>
-      <button style="background-color: #5e1f18" *ngIf="products || orderProduct" class="action" mat-button [matMenuTriggerFor]="menuCategory">{{'manage.category' | translate}}</button>
+      <button
+        style="background-color: #007bff; color: #fff; margin-right: 20px"
+        *ngIf="tables && localStorage.getItem('role') === 'admin'"
+        (click)="createProduct()"
+        mat-button
+      >
+        {{ "manage.manageTable.addTables" | translate }}
+      </button>
+      <button
+        style="background-color: #007bff; color: #fff; margin-right: 20px"
+        *ngIf="products && localStorage.getItem('role') === 'admin'"
+        (click)="createProduct()"
+        mat-button
+      >
+        {{ "manage.manageProduct.createProduct" | translate }}
+      </button>
+      <button
+        style="background-color: #5e1f18"
+        *ngIf="products || orderProduct"
+        class="action"
+        mat-button
+        [matMenuTriggerFor]="menuCategory"
+      >
+        {{ "manage.category" | translate }}
+      </button>
       <mat-menu #menuCategory="matMenu" class="menuAction">
-        <button [ngClass]="{'active': isCategoryActive('coffee')}" mat-menu-item (click)="getProduct('coffee')">{{'manage.coffee'| translate}}</button>
-        <button [ngClass]="{'active': isCategoryActive('cakes')}" mat-menu-item (click)="getProduct('cakes')">{{'manage.cake'| translate}}</button>
-        <button [ngClass]="{'active': isCategoryActive('snacks')}" mat-menu-item (click)="getProduct('snacks')">{{'manage.snacks'| translate}}</button>
+        <button
+          [ngClass]="{ active: isCategoryActive('coffee') }"
+          mat-menu-item
+          (click)="getProduct('coffee')"
+        >
+          {{ "manage.coffee" | translate }}
+        </button>
+        <button
+          [ngClass]="{ active: isCategoryActive('cakes') }"
+          mat-menu-item
+          (click)="getProduct('cakes')"
+        >
+          {{ "manage.cake" | translate }}
+        </button>
+        <button
+          [ngClass]="{ active: isCategoryActive('snacks') }"
+          mat-menu-item
+          (click)="getProduct('snacks')"
+        >
+          {{ "manage.snacks" | translate }}
+        </button>
       </mat-menu>
 
-      <button *ngIf="selectedItems.length >= 1" class="action" mat-button [matMenuTriggerFor]="menu">{{'manage.action' | translate}}</button>
+      <button
+        *ngIf="selectedItems.length >= 1"
+        class="action"
+        mat-button
+        [matMenuTriggerFor]="menu"
+      >
+        {{ "manage.action" | translate }}
+      </button>
       <mat-menu #menu="matMenu" class="menuAction">
-        <button *ngIf="localStorage.getItem('role') === 'admin'" mat-menu-item (click)="deleteCol()">{{'manage.orders.delete'| translate}}</button>
-        <button *ngIf="order" mat-menu-item (click)="changStatus()">{{'manage.orders.changeStatus'| translate}}</button>
+        <button
+          *ngIf="localStorage.getItem('role') === 'admin'"
+          mat-menu-item
+          (click)="deleteCol()"
+        >
+          {{ "manage.orders.delete" | translate }}
+        </button>
+        <button *ngIf="order" mat-menu-item (click)="changStatus()">
+          {{ "manage.orders.changeStatus" | translate }}
+        </button>
       </mat-menu>
-      <button (click)="refresh()" mat-button style="float: right; background-color: #d7d7db;"><i class="fas fa-sync-alt"></i></button>
-      <nav *ngIf="!overview && !tables && !products && !account && !users && !emptyOrder && !orderProduct" style="margin-left: 20px">
+      <button
+        (click)="refresh()"
+        mat-button
+        style="float: right; background-color: #d7d7db"
+      >
+        <i class="fas fa-sync-alt"></i>
+      </button>
+      <nav
+        *ngIf="
+          !overview &&
+          !tables &&
+          !products &&
+          !account &&
+          !users &&
+          !emptyOrder &&
+          !orderProduct
+        "
+        style="margin-left: 20px"
+      >
         <ul style="margin: 0" class="pagination">
-          <li class="page-item" (click)="prevPage()" [class.disabled]="currentPage === 1">
+          <li
+            class="page-item"
+            (click)="prevPage()"
+            [class.disabled]="currentPage === 1"
+          >
             <button class="page-link" aria-label="Previous">
               <span aria-hidden="true"><i class="fas fa-caret-left"></i></span>
             </button>
@@ -34,7 +146,11 @@
           <li class="page-item active">
             <button class="page-link">{{ currentPage }}</button>
           </li>
-          <li class="page-item" (click)="nextPage()" [class.disabled]="currentPage === totalPages">
+          <li
+            class="page-item"
+            (click)="nextPage()"
+            [class.disabled]="currentPage === totalPages"
+          >
             <button class="page-link" aria-label="Next">
               <span aria-hidden="true"><i class="fas fa-caret-right"></i></span>
             </button>
@@ -43,157 +159,302 @@
       </nav>
     </div>
   </section>
-  <table class="table" *ngIf="!overview && !orderProduct &&!emptyOrder && !tables &&!users && !products && !account && rowData && rowData.length > 0">
+  <table
+    class="table"
+    *ngIf="
+      !overview &&
+      !orderProduct &&
+      !emptyOrder &&
+      !tables &&
+      !users &&
+      !products &&
+      !account &&
+      rowData &&
+      rowData.length > 0
+    "
+  >
     <thead>
-    <tr>
-      <th style="padding: 0 0 4px 0"><mat-checkbox  [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
-      <th>{{'manage.orders.id'| translate}}</th>
-      <th>{{'manage.orders.tables'| translate}}</th>
-      <th>{{'manage.orders.orderTime'| translate}}</th>
-      <th *ngIf="revenue">{{'manage.revenues.customer_name' | translate }}</th>
-      <th>{{'manage.orders.products'| translate}}</th>
-      <th>{{'manage.orders.totals' | translate}}</th>
-      <th *ngIf="order">{{'manage.orders.status'| translate}}</th>
-      <th>{{'manage.action'| translate}}</th>
-    </tr>
+      <tr>
+        <th style="padding: 0 0 4px 0">
+          <mat-checkbox
+            [(ngModel)]="selectedAll"
+            (change)="selectAll()"
+          ></mat-checkbox>
+        </th>
+        <th>{{ "manage.orders.id" | translate }}</th>
+        <th>{{ "manage.orders.tables" | translate }}</th>
+        <th>{{ "manage.orders.orderTime" | translate }}</th>
+        <th *ngIf="revenue">
+          {{ "manage.revenues.customer_name" | translate }}
+        </th>
+        <th>{{ "manage.orders.products" | translate }}</th>
+        <th>{{ "manage.orders.totals" | translate }}</th>
+        <th *ngIf="order">{{ "manage.orders.status" | translate }}</th>
+        <th>{{ "manage.action" | translate }}</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let col of paginatedItems" [class.selected]="isItemSelected(col)">
-      <td style="width: 20px">
-        <input type="checkbox" (change)="selectItem($event, col)" [checked]="isSelected(col)">
-      </td>
-      <td style="width: 128px">{{ col?.order_id }}</td>
-      <td style="width: 20px">{{ col?.table_number }}</td>
-      <td>{{ col?.date_order }}</td>
-      <td *ngIf="revenue">{{ col?.customer_name === "" ? 'N/A' : col?.customer_name}}</td>
-      <td  style=" white-space: nowrap;overflow: hidden;text-overflow: ellipsis; max-width: 300px; " >{{ col?.product_name }}</td>
-      <td>{{ col?.total_amount | currency: 'VND' }}</td>
-      <td *ngIf="order" [ngStyle]="{'color': (col.is_paid === '1') ? '#28a745' : col.is_paid === '0' ? '#dc3545': col.is_paid === '2' ? '#c99f32' : '' }">
-        {{ col.is_paid === "1" ? ('manage.orders.paid' | translate) : col.is_paid === "0" ? ('manage.orders.unpaid' | translate) : col.is_paid === "2" ? ('manage.orders.shipping' | translate) : '' }}
-      </td>
+      <tr
+        *ngFor="let col of paginatedItems"
+        [class.selected]="isItemSelected(col)"
+      >
+        <td style="width: 20px">
+          <input
+            type="checkbox"
+            (change)="selectItem($event, col)"
+            [checked]="isSelected(col)"
+          />
+        </td>
+        <td style="width: 128px">{{ col?.order_id }}</td>
+        <td style="width: 20px">{{ col?.table_number }}</td>
+        <td>{{ col?.date_order }}</td>
+        <td *ngIf="revenue">
+          {{ col?.customer_name === "" ? "N/A" : col?.customer_name }}
+        </td>
+        <td
+          style="
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+          "
+        >
+          {{ col?.product_name }}
+        </td>
+        <td>{{ col?.total_amount | currency : "VND" }}</td>
+        <td
+          *ngIf="order"
+          [ngStyle]="{
+            color:
+              col.is_paid === '1'
+                ? '#28a745'
+                : col.is_paid === '0'
+                ? '#dc3545'
+                : col.is_paid === '2'
+                ? '#c99f32'
+                : ''
+          }"
+        >
+          {{
+            col.is_paid === "1"
+              ? ("manage.orders.paid" | translate)
+              : col.is_paid === "0"
+              ? ("manage.orders.unpaid" | translate)
+              : col.is_paid === "2"
+              ? ("manage.orders.shipping" | translate)
+              : ""
+          }}
+        </td>
 
-      <td class="actionTable">
-        <button [ngStyle]="{'margin-left': revenue ? '36px' : ''}" *ngIf="localStorage.getItem('role') === 'admin'" class="delete" (click)="delete(col)">
-          <i class="fas fa-trash-alt"></i>
-        </button>
+        <td class="actionTable">
+          <button
+            [ngStyle]="{ 'margin-left': revenue ? '36px' : '' }"
+            *ngIf="localStorage.getItem('role') === 'admin'"
+            class="delete"
+            (click)="delete(col)"
+          >
+            <i class="fas fa-trash-alt"></i>
+          </button>
 
-        <button *ngIf="order" class="delete" (click)="detail(col)">
-          <i class="far fa-eye"></i>
-        </button>
+          <button *ngIf="order" class="delete" (click)="detail(col)">
+            <i class="far fa-eye"></i>
+          </button>
 
-        <button *ngIf="order"  class="delete" (click)="changStatusTable(col)">
-          <i class="far fa-edit"></i>
-        </button>
-        <button *ngIf="order"  class="delete" (click)="exportToPdf(col)">
-          <i class="fas fa-print"></i>
-        </button>
-      </td>
-    </tr>
+          <button *ngIf="order" class="delete" (click)="changStatusTable(col)">
+            <i class="far fa-edit"></i>
+          </button>
+          <button *ngIf="order" class="delete" (click)="exportToPdf(col)">
+            <i class="fas fa-print"></i>
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
   <section class="products__list" *ngIf="products && !noData">
     <div class="products__item" *ngFor="let col of rowData">
       <div class="products__item--img">
-        <img class="card-img-top" src="{{col.image_url}}" alt="Card image cap">
+        <img
+          class="card-img-top"
+          src="{{ col.image_url }}"
+          alt="Card image cap"
+        />
       </div>
       <div class="card-body">
-        <div style="display: flex; justify-content: space-between; align-items: center">
-          <h5 class="card-title">{{col.name}}</h5>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h5 class="card-title">{{ col.name }}</h5>
           <button class="outStock" (click)="bookmark(col)">
             <i *ngIf="col.InStock === '1'" class="fas fa-bookmark"></i>
             <i *ngIf="col.InStock === '0'" class="far fa-bookmark"></i>
           </button>
         </div>
-        <p class="price" style="font-weight: bold"><span>{{'manage.orders.price' | translate}}: </span>{{col.price | currency: 'VND'}}</p>
-        <p class="products__item--description price"><span>{{'manage.manageProduct.description' | translate}}: </span>{{col.description}}</p>
-          <div class="list__btn" [ngStyle]="{'justify-content' : localStorage.getItem('role') === 'admin' ? 'space-between' : 'end' }">
-            <a class="btn btn-primary" target="_blank" style="background-color: #007bff; color: #fff" (click)="detailProdcut(col.product_id)">{{'manage.viewDetail' | translate}}</a>
-            <div style="display: flex; align-items: center" *ngIf="localStorage.getItem('role') === 'admin'">
-              <button style="margin-right: 10px" (click)="deleteProduct(col)">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-              <button (click)="changeProduct(col)">
-                <i class="far fa-edit"></i>
-              </button>
-            </div>
+        <p class="price" style="font-weight: bold">
+          <span>{{ "manage.orders.price" | translate }}: </span
+          >{{ col.price | currency : "VND" }}
+        </p>
+        <p class="products__item--description price">
+          <span>{{ "manage.manageProduct.description" | translate }}: </span
+          >{{ col.description }}
+        </p>
+        <div
+          class="list__btn"
+          [ngStyle]="{
+            'justify-content':
+              localStorage.getItem('role') === 'admin' ? 'space-between' : 'end'
+          }"
+        >
+          <a
+            class="btn btn-primary"
+            target="_blank"
+            style="background-color: #007bff; color: #fff"
+            (click)="detailProdcut(col.product_id)"
+            >{{ "manage.viewDetail" | translate }}</a
+          >
+          <div
+            style="display: flex; align-items: center"
+            *ngIf="localStorage.getItem('role') === 'admin'"
+          >
+            <button style="margin-right: 10px" (click)="deleteProduct(col)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button (click)="changeProduct(col)">
+              <i class="far fa-edit"></i>
+            </button>
           </div>
+        </div>
       </div>
     </div>
   </section>
-  <section class="account__list " *ngIf="account || users">
-    <table  [ngStyle]="{'min-height': rowData.length > 0 ? '520px' : '0px'}">
+  <section class="account__list" *ngIf="account || users">
+    <table [ngStyle]="{ 'min-height': rowData.length > 0 ? '520px' : '0px' }">
       <thead>
         <tr *ngIf="account">
-          <th style="padding-left: 40px">{{'manage.manageAccount.id'| translate}}</th>
-          <th>{{'manage.manageAccount.name'| translate}}</th>
-          <th>{{'manage.manageAccount.img'| translate}}</th>
-          <th>{{'manage.manageAccount.email'| translate}}</th>
-          <th *ngIf="localStorage.getItem('role') ==='admin'">{{'manage.manageAccount.password'| translate}}</th>
-          <th>{{'manage.manageAccount.role'| translate}}</th>
-          <th *ngIf="localStorage.getItem('role') ==='admin'">{{'manage.manageAccount.action'| translate}}</th>
+          <th style="padding-left: 40px">
+            {{ "manage.manageAccount.id" | translate }}
+          </th>
+          <th>{{ "manage.manageAccount.name" | translate }}</th>
+          <th>{{ "manage.manageAccount.img" | translate }}</th>
+          <th>{{ "manage.manageAccount.email" | translate }}</th>
+          <th *ngIf="localStorage.getItem('role') === 'admin'">
+            {{ "manage.manageAccount.password" | translate }}
+          </th>
+          <th>{{ "manage.manageAccount.role" | translate }}</th>
+          <th *ngIf="localStorage.getItem('role') === 'admin'">
+            {{ "manage.manageAccount.action" | translate }}
+          </th>
         </tr>
         <tr *ngIf="users">
           <th style="padding-left: 40px">ID NV</th>
-          <th>{{'manage.manageUser.name'| translate}}</th>
-          <th>{{'manage.manageUser.email'| translate}}</th>
-          <th>{{'manage.manageUser.phone'| translate}}</th>
-          <th>{{'manage.manageUser.hire_date'| translate}}</th>
-          <th>{{'manage.manageUser.role'| translate}}</th>
-          <th *ngIf="localStorage.getItem('role') ==='admin'">{{'manage.manageUser.action'| translate}}</th>
+          <th>{{ "manage.manageUser.name" | translate }}</th>
+          <th>{{ "manage.manageUser.email" | translate }}</th>
+          <th>{{ "manage.manageUser.phone" | translate }}</th>
+          <th>{{ "manage.manageUser.hire_date" | translate }}</th>
+          <th>{{ "manage.manageUser.role" | translate }}</th>
+          <th *ngIf="localStorage.getItem('role') === 'admin'">
+            {{ "manage.manageUser.action" | translate }}
+          </th>
         </tr>
       </thead>
       <tbody class="account__body" *ngIf="account">
         <tr *ngFor="let col of rowData">
-        <td style="padding-left: 40px" class="account__body--item">{{col.account_id}}</td>
-        <td class="account__body--item" style="text-transform: uppercase">{{col.username}}</td>
-        <td class="account__body--item">
-          <div class="account__body--img">
-            <img src="{{col.img}}" alt="ảnh">
-          </div>
-        </td>
-        <td class="account__body--item">{{col.email}}</td>
-        <td class="account__body--item" *ngIf="localStorage.getItem('role') ==='admin'">{{col.password}}</td>
-        <td class="account__body--item">{{col.role}}</td>
-        <td class="account__body--item account__action" *ngIf="localStorage.getItem('role') ==='admin'">
-          <button style="margin-right: 8px" class="delete" (click)="delete(col)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-          <button class="delete" (click)="changStatusTable(col)">
-            <i class="far fa-edit"></i>
-          </button>
-        </td>
-      </tr>
-      </tbody>
-      <tbody class="account__body" *ngIf="users">
-        <tr *ngFor="let col of rowData">
-          <td style="padding-left: 40px" class="account__body--item">{{col.user_id}}</td>
-          <td class="account__body--item" style="text-transform: uppercase">{{col.name}}</td>
-          <td class="account__body--item">{{col.email}}</td>
-          <td class="account__body--item">{{col.phone_number}}</td>
-          <td class="account__body--item">{{col.hire_date}}</td>
-          <td class="account__body--item">{{col.position}}</td>
-          <td class="account__body--item account__action" *ngIf="localStorage.getItem('role') === 'admin'">
-            <button style="margin-right: 8px"  class="delete" (click)="delete(col)">
+          <td style="padding-left: 40px" class="account__body--item">
+            {{ col.account_id }}
+          </td>
+          <td class="account__body--item" style="text-transform: uppercase">
+            {{ col.username }}
+          </td>
+          <td class="account__body--item">
+            <div class="account__body--img">
+              <img src="{{ col.img }}" alt="ảnh" />
+            </div>
+          </td>
+          <td class="account__body--item">{{ col.email }}</td>
+          <td
+            class="account__body--item"
+            *ngIf="localStorage.getItem('role') === 'admin'"
+          >
+            {{ col.password }}
+          </td>
+          <td class="account__body--item">{{ col.role }}</td>
+          <td
+            class="account__body--item account__action"
+            *ngIf="localStorage.getItem('role') === 'admin'"
+          >
+            <button
+              style="margin-right: 8px"
+              class="delete"
+              (click)="delete(col)"
+            >
               <i class="fas fa-trash-alt"></i>
             </button>
             <button class="delete" (click)="changStatusTable(col)">
               <i class="far fa-edit"></i>
             </button>
           </td>
-      </tr>
+        </tr>
+      </tbody>
+      <tbody class="account__body" *ngIf="users">
+        <tr *ngFor="let col of rowData">
+          <td style="padding-left: 40px" class="account__body--item">
+            {{ col.user_id }}
+          </td>
+          <td class="account__body--item" style="text-transform: uppercase">
+            {{ col.name }}
+          </td>
+          <td class="account__body--item">{{ col.email }}</td>
+          <td class="account__body--item">{{ col.phone_number }}</td>
+          <td class="account__body--item">{{ col.hire_date }}</td>
+          <td class="account__body--item">{{ col.position }}</td>
+          <td
+            class="account__body--item account__action"
+            *ngIf="localStorage.getItem('role') === 'admin'"
+          >
+            <button
+              style="margin-right: 8px"
+              class="delete"
+              (click)="delete(col)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button class="delete" (click)="changStatusTable(col)">
+              <i class="far fa-edit"></i>
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </section>
-  <section class="tables__list" *ngIf="tables" [ngStyle]="{'min-height': rowData.length > 0 ? '520px' : '0px'}">
+  <section
+    class="tables__list"
+    *ngIf="tables"
+    [ngStyle]="{ 'min-height': rowData.length > 0 ? '520px' : '0px' }"
+  >
     <div class="table__item" *ngFor="let col of rowData">
       <div class="table__item--img">
-        <button class="close" *ngIf="col.empty !== '0' && localStorage.getItem('role') === 'admin'" (click)="deleteTable(col)"><i class="fas fa-trash-alt"></i></button>
-        <img src="./assets/img/table.png" alt="bàn">
-        <div class="empty" *ngIf="col.empty === '0'" (click)="detailTable(col.table_id)">
-          <p style="padding-top: 50px">{{localStorage.getItem('lang') === 'vi' ? 'có người' : 'full'}}</p>
+        <button
+          class="close"
+          *ngIf="col.empty !== '0' && localStorage.getItem('role') === 'admin'"
+          (click)="deleteTable(col)"
+        >
+          <i class="fas fa-trash-alt"></i>
+        </button>
+        <img src="./assets/img/table.png" alt="bàn" />
+        <div
+          class="empty"
+          *ngIf="col.empty === '0'"
+          (click)="detailTable(col.table_id)"
+        >
+          <p style="padding-top: 50px">
+            {{ localStorage.getItem("lang") === "vi" ? "có người" : "full" }}
+          </p>
         </div>
       </div>
-      <span style="margin-top: 10px">{{col.table_id}}</span>
+      <span style="margin-top: 10px">{{ col.table_id }}</span>
     </div>
   </section>
   <section class="empty__order" *ngIf="emptyOrder">
@@ -201,89 +462,162 @@
       <div *ngIf="col.empty === '0'" class="plus">
         <i class="fas fa-plus" (click)="changeOrder(col)"></i>
       </div>
-      <div class="table__item--img" (click)="col.empty !== '0' ? handleOrder(col) : detailTableEmpty(col.table_id)">
-        <img src="./assets/img/table.png" alt="bàn">
+      <div
+        class="table__item--img"
+        (click)="
+          col.empty !== '0' ? handleOrder(col) : detailTableEmpty(col.table_id)
+        "
+      >
+        <img src="./assets/img/table.png" alt="bàn" />
         <div class="empty" *ngIf="col.empty === '0'">
-          <p style="padding-top: 50px">{{localStorage.getItem('lang') === 'vi' ? 'có người' : 'full'}}</p>
+          <p style="padding-top: 50px">
+            {{ localStorage.getItem("lang") === "vi" ? "có người" : "full" }}
+          </p>
         </div>
       </div>
-      <span style="margin-top: 10px">{{col.table_id}}</span>
+      <span style="margin-top: 10px">{{ col.table_id }}</span>
     </div>
   </section>
   <section class="orderProduct" *ngIf="orderProduct">
     <section class="col_left">
       <header>
-        <h1>{{'global.mon' | translate}}</h1>
+        <h1>{{ "global.mon" | translate }}</h1>
       </header>
       <div class="orderProduct__listed">
-          <div class="products__item" *ngFor="let col of rowData">
-            <div class="products__item--img">
-              <img class="card-img-top" src="{{col.image_url}}" alt="Card image cap">
+        <div class="products__item" *ngFor="let col of rowData">
+          <div class="products__item--img">
+            <img
+              class="card-img-top"
+              src="{{ col.image_url }}"
+              alt="Card image cap"
+            />
+          </div>
+          <div class="card-body">
+            <div
+              style="
+                display: flex;
+                margin: 10px 0;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <h5 class="card-title">{{ col.name }}</h5>
             </div>
-            <div class="card-body">
-              <div style="display: flex; margin: 10px 0 ; justify-content: space-between; align-items: center">
-                <h5 class="card-title">{{col.name}}</h5>
-              </div>
-              <p class="price"><span>{{'manage.manageTable.price' | translate}}: </span>{{col.price | currency: 'VND'}}</p>
-              <div class="list__btn">
-                <button (click)="handleAddProduct(col)">{{'global.add' | translate }}</button>
-              </div>
+            <p class="price">
+              <span>{{ "manage.manageTable.price" | translate }}: </span
+              >{{ col.price | currency : "VND" }}
+            </p>
+            <div class="list__btn">
+              <button (click)="handleAddProduct(col)">
+                {{ "global.add" | translate }}
+              </button>
             </div>
           </div>
+        </div>
       </div>
-
     </section>
     <section class="col_right">
       <header>
-       <h1>{{'manage.manageTable.listOrder' | translate}}</h1>
+        <h1>{{ "manage.manageTable.listOrder" | translate }}</h1>
       </header>
       <div class="orderProduct__listed">
         <div class="listProduct__item" *ngFor="let item of productOrdered">
           <div class="listProduct__item--img">
-            <img src="{{item.image_url}}" alt="item.name">
+            <img src="{{ item.image_url }}" alt="item.name" />
           </div>
           <div class="listProduct__item--name">
-            <p>{{item.name}}</p>
+            <p>{{ item.name }}</p>
           </div>
-          <div style="position: absolute; right: 10px; display: flex; align-items: center">
+          <div
+            style="
+              position: absolute;
+              right: 10px;
+              display: flex;
+              align-items: center;
+            "
+          >
             <div class="listProduct__item--quantity">
               <div class="quantity-control">
-                <button class="quantity-btn"
-                        (click)="decreaseQuantity(item)" [disabled]="item.total === 1">-</button>
-                <span class="quantity-text" style="margin: 0 8px;font-weight: bold;">{{item.total}}</span>
-                <button class="quantity-btn"
-                        (click)="increaseQuantity(item)">+</button>
+                <button
+                  class="quantity-btn"
+                  (click)="decreaseQuantity(item)"
+                  [disabled]="item.total === 1"
+                >
+                  -
+                </button>
+                <span
+                  class="quantity-text"
+                  style="margin: 0 8px; font-weight: bold"
+                  >{{ item.total }}</span
+                >
+                <button class="quantity-btn" (click)="increaseQuantity(item)">
+                  +
+                </button>
               </div>
             </div>
             <div class="listProduct__item--price">
-              <span>{{item.price * item.total | currency:'VND'}}</span>
+              <span>{{ item.price * item.total | currency : "VND" }}</span>
             </div>
           </div>
         </div>
       </div>
       <div class="orderProduct__listed--submit">
-        <div style="display: flex; justify-content: space-around; align-items: center; min-width: 444px">
-          <button mat-button (click)="clearOrder()" [ngStyle]="{'background-color': productOrdered.length === 0 ? '#ccc' : 'blue', 'color': productOrdered.length === 0 ? '#000' : '#fff'}" [disabled]="productOrdered.length === 0">xóa</button>
-          <button mat-button (click)="orderPro()"
-                  [ngStyle]="{'background-color': productOrdered.length === 0 ? '#ccc' : 'blue', 'color': productOrdered.length === 0 ? '#000' : '#fff'}" [disabled]="productOrdered.length === 0"
-          >{{localStorage.getItem('lang')==='vi' ? 'Tạo đơn': 'Creat order'}} </button>
+        <div
+          style="
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-width: 444px;
+          "
+        >
+          <button
+            mat-button
+            (click)="clearOrder()"
+            [ngStyle]="{
+              'background-color': productOrdered.length === 0 ? '#ccc' : 'blue',
+              color: productOrdered.length === 0 ? '#000' : '#fff'
+            }"
+            [disabled]="productOrdered.length === 0"
+          >
+            xóa
+          </button>
+          <button
+            mat-button
+            (click)="orderPro()"
+            [ngStyle]="{
+              'background-color': productOrdered.length === 0 ? '#ccc' : 'blue',
+              color: productOrdered.length === 0 ? '#000' : '#fff'
+            }"
+            [disabled]="productOrdered.length === 0"
+          >
+            {{
+              localStorage.getItem("lang") === "vi" ? "Tạo đơn" : "Creat order"
+            }}
+          </button>
         </div>
-
       </div>
-
     </section>
-
   </section>
 
-  <section class="overview" *ngIf="overview" style="margin-top: 40px;">
-    <highcharts-chart style="width: 1000px; height: 400px;" #chart
-                      [Highcharts]="Highcharts"
-                      [callbackFunction]="chartCallback"
-                      [options]="chartOptions"
-                      [(update)]="updateFlag">
+  <section class="overview" *ngIf="overview" style="margin-top: 40px">
+    <highcharts-chart
+      style="width: 1000px; height: 400px"
+      #chart
+      [Highcharts]="Highcharts"
+      [callbackFunction]="chartCallback"
+      [options]="chartOptions"
+      [(update)]="updateFlag"
+    >
     </highcharts-chart>
     <h1>
-      <button style="width: 110px" mat-button class="overviewDetail" (click)="overviewDetailRevenue()">{{'manage.viewDetail' | translate}}</button>
+      <button
+        style="width: 110px"
+        mat-button
+        class="overviewDetail"
+        (click)="overviewDetailRevenue()"
+      >
+        {{ "manage.viewDetail" | translate }}
+      </button>
     </h1>
   </section>
 
@@ -291,7 +625,7 @@
     <mat-spinner></mat-spinner>
   </section>
   <section class="noData" *ngIf="noData">
-    <img src="assets/img/no-data.svg" alt="nodata">
-    <h2>{{'global.nodata'| translate}}</h2>
+    <img src="assets/img/no-data.svg" alt="nodata" />
+    <h2>{{ "global.nodata" | translate }}</h2>
   </section>
 </div>

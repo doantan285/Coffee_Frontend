@@ -1,15 +1,19 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from "./app-routing.module";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {ShareService} from "./share/share.service";
-import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
-import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ShareService } from './share/share.service';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
-import {LayoutModule} from "./layout/layout.module";
+import { LayoutModule } from './layout/layout.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HighchartsChartModule } from 'highcharts-angular';
 
@@ -18,13 +22,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 export function appInitializerFactory(translate: TranslateService) {
-  return () => {
-  };
+  return () => {};
 }
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -32,27 +33,28 @@ export function appInitializerFactory(translate: TranslateService) {
     MatDialogModule,
     HighchartsChartModule,
     TranslateModule.forRoot({
-      defaultLanguage: localStorage.getItem('lang') === 'en' ? 'en': 'vi',
+      defaultLanguage: localStorage.getItem('lang') === 'en' ? 'en' : 'vi',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     AppRoutingModule,
     FormsModule,
     LayoutModule,
   ],
-  providers: [ShareService,
+  providers: [
+    ShareService,
     {
-    provide: APP_INITIALIZER,
-    useFactory: appInitializerFactory,
-    multi: true,
-    deps: [TranslateService],
-  },],
-  bootstrap: [AppComponent]
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      multi: true,
+      deps: [TranslateService],
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() {
-  }
+  constructor() {}
 }

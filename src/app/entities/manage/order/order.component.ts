@@ -54,6 +54,7 @@ export class OrderComponent implements OnInit, OnDestroy{
       ORDER_ID: orderData.order_id,
       NAME: orderData.customer_name ? orderData.customer_name  : 'không có dữ liệu',
       TIME_ORDER: orderData.date_order,
+      USER_ORDER: orderData.user_name,
       NAME_PRODUCT: orderData.product_name,
       TABLE_NUMBER: orderData.table_number,
       PRICE: `${parseFloat(orderData.total_amount).toLocaleString('vi-VN')} VNĐ`,

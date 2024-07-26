@@ -25,7 +25,7 @@ export class ImgDetailComponent implements OnInit{
 
   ngOnInit() {
     switch (this.data) {
-      case '1':
+      case '1': 
         this.img = './assets/img/imgHome/1.webp';
         break;
       case '2':

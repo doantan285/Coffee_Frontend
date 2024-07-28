@@ -16,15 +16,18 @@ export class OrderProductComponent implements OnInit{
   table_number : any
   dataProducts: any[] = [];
   clearSearchProduct = false;
+  dataOldOrder: any;
   noData = false
   orderSuc = false
+  loading: boolean = false
   categorySearch = 'coffee'
   constructor(
     private dialog: MatDialog,
-    private productService : ProductsService,private _snackBar: MatSnackBar,
-              private employService : EmployOrderService,
-              private activatedRoute: ActivatedRoute
-              ) {
+    private productService : ProductsService,
+    private _snackBar: MatSnackBar,
+    private employService : EmployOrderService,
+    private activatedRoute: ActivatedRoute
+    ) {
     this.activatedRoute.queryParams.subscribe( queryParams =>{
       this.table_number = queryParams
       this.table_number = this.table_number?.table_number
@@ -34,6 +37,14 @@ export class OrderProductComponent implements OnInit{
 
   ngOnInit() {
     this.categoryProduct('coffee')
+    this.productService.getOldOrder(this.table_number).subscribe(
+      res =>{
+        this.dataOldOrder = res[0]
+      },
+      err =>{
+        console.log(err);
+      }
+    )
   }
 
   refresh(event: any): void{
@@ -54,18 +65,15 @@ export class OrderProductComponent implements OnInit{
     })
   }
 
-  getCoffee(){
-    this.productService.getProductCoffee().subscribe(
+  getCoffee(){    this.productService.getProductCoffee().subscribe(
       res =>{
         this.dataProducts = res.slice().reverse()
         if(this.dataProducts.length === 0){
-          this.noData = true
-        }
+          this.noData = true        }
       },
       error =>{
         this.noData = true
         console.log('thất bại')
-
       }
     )
   }
@@ -80,7 +88,6 @@ export class OrderProductComponent implements OnInit{
 
       },
       error =>{
-
         console.log('thất bại')
 
       }
@@ -103,6 +110,7 @@ export class OrderProductComponent implements OnInit{
   }
 
   onSearch(data: any): void{
+
     this.clearSearchProduct = false
     const search = {
       category: this.categorySearch,
@@ -114,6 +122,7 @@ export class OrderProductComponent implements OnInit{
         if(res.length === 0){
           this.noData = true
         }
+      },err=>{
       }
     )
   }

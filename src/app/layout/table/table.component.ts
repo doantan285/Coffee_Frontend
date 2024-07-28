@@ -35,7 +35,7 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
   @Output() orderEmpty:  EventEmitter<any> = new EventEmitter<any>()
   @Output() export:  EventEmitter<any> = new EventEmitter<any>()
 
-
+  @Input() dataOldOrder: any;
   @Input() tableNumber = 0;
   @Input() columns: any;
   @Input() totalRevenue?: number
@@ -54,8 +54,10 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
   @Input() tables = false;
 
 
+  priceTotal: any;
   Highcharts: typeof Highcharts = Highcharts;
   chartRef: any;
+  discount: number = 0;
   updateFlag: any;
   chartOptions: any;
   dataOverview: any[]= [];
@@ -99,6 +101,19 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
     )
   }
 
+  getTotalPrice(): number {
+    let totalNew = this.productOrdered.reduce((total, item) => {
+        return total + (item.price * item.total);
+    }, 0);
+  
+    if (this.discount) {
+      this.priceTotal = totalNew - (totalNew * this.discount / 100) + Number(this.dataOldOrder?.total_amount || 0)
+      return this.priceTotal
+    } else {
+      this.priceTotal = totalNew + Number(this.dataOldOrder?.total_amount || 0)
+      return this.priceTotal;
+    }
+  }
   updateChart():void {
     this.chartOptions = {
       chart: {
@@ -166,21 +181,47 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
     this.subscriptions.unsubscribe();
     localStorage.setItem('productOrder', JSON.stringify({}));
   }
-  ngOnChanges(changes: SimpleChanges) {
+
+ ngOnChanges(changes: SimpleChanges) {
+    setTimeout(() => {
+        if (this.dataOldOrder && typeof this.dataOldOrder.product_name === 'string') {
+            this.dataOldOrder.product_name = this.convertProductName(this.dataOldOrder.product_name);
+            console.log(this.dataOldOrder);
+        }
+    }, 100);
+
     if (this.rowData && this.rowData.length) {
-      this.totals = this.rowData.length;
+        this.totals = this.rowData.length;
 
-      this.rowData.sort((a: any, b: any) => {
-        const dateA = new Date(a.date_order);
-        const dateB = new Date(b.date_order);
-        return dateB.getTime() - dateA.getTime();
-      });
+        this.rowData.sort((a: any, b: any) => {
+            const dateA = new Date(a.date_order);
+            const dateB = new Date(b.date_order);
+            return dateB.getTime() - dateA.getTime();
+        });
     } else {
-      this.totals = 0;
+        this.totals = 0;
     }
+}
+
+
+  convertProductName(productName: string) {
+    if(productName){
+      const productsArray = productName.split(',').map(item => {
+        const matches = item.match(/^(.*)\((\d+)\)$/);
+        if (matches) {
+          return {
+            name: matches[1].trim(),
+            total: parseInt(matches[2], 10)
+          };
+        }
+        return null;
+      }).filter(item => item !== null);
+    
+      return productsArray;
+    }
+    return ''
+    
   }
-
-
 
   deleteCol(): void{
     this.updateRow.emit({
@@ -415,6 +456,7 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
   }
 
   handleAddProduct(data: any): void {
+    
     let found = false;
     for (let i = 0; i < this.productOrdered.length; i++) {
       if (this.productOrdered[i].product_id === data.product_id) {
@@ -433,6 +475,7 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
         total: 1
       };
       this.productOrdered.push(res);
+      
     }
     localStorage.setItem('productOrder', JSON.stringify(this.productOrdered));
   }
@@ -449,9 +492,15 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
 
   orderPro(): void {
     const updatedProductOrdered = this.productOrdered.map(product => {
-      const { category, name, price, product_id, total } = product;
+      const { category, name, price, product_id, total  } = product;
       return { category, name, price, product_id, total };
     });
+    // update thêm tính năng chiết khấu và dữ liệu đơn hàng cũ
+    const data = {
+      discount : this.discount,
+      totalPrice: this.priceTotal
+    }
+    sessionStorage.setItem('dataUpdateFeature', JSON.stringify(data) )
     this.updateRow.emit(updatedProductOrdered)
   }
 

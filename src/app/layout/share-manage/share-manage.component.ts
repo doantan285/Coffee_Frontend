@@ -26,6 +26,7 @@ export class ShareManageComponent implements OnInit, OnChanges{
   public subscription: Subscription = new Subscription();
   @ViewChild('drawer') drawer?: MatDrawer;
   @Input() columns: any;
+  @Input() dataOldOrder: any;
   @Input() totalRevenue?: number;
   @Input() rowData: any;
   @Input() orderSuc = false;

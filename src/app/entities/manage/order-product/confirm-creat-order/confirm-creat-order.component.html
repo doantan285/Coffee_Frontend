@@ -2,9 +2,31 @@
     <h1 style="text-transform: uppercase">xác nhận đơn hàng</h1>
   <button class="close" (click)="close()"><i class="fas fa-times"></i></button>
 
+
 </header>
+<div *ngIf="oldOrder" class="dataOldOrder">
+  <h4>
+    Danh sách các món đã đặt trước đó
+    
+  </h4>
+  <div class="dataOldOrder_content" *ngFor="let item of oldOrder.product_name">
+    <div class="dataOldOrder_content-item">
+      <span>Sản phẩm:</span>
+      <span>{{item.name}} ({{item.total}})</span>
+    </div>
+    
+  </div>
+  <div class="dataOldOrder_content">
+    <span>Giá:</span>
+    <span>{{oldOrder.total_amount  | currency : "VND" }}</span>
+  </div>
+  <div class="dataOldOrder_content" *ngIf="oldOrder.discount">
+    <span>Chiết khấu:</span>
+    <span>{{oldOrder.discount  | currency : "VND" }}</span>
+  </div>
+</div>
 <div class="product">
-  <h2 *ngIf="oldOrder.length >= 1">
+  <h2 *ngIf="oldOrder?.length >= 1">
     {{'global.addOrder' | translate}} : {{table}}
   </h2>
   <div class="product__list">
@@ -23,6 +45,11 @@
       </p>
     </div>
 
+  </div>
+  <div style="margin: 30px 0; font-weight: bold; display: flex; justify-content: space-between">
+    <div style="font-size: 22px">
+      {{'Chiết khấu' | translate}} : {{dataUpdateFeature.discount}} %
+    </div>
   </div>
   <div style="margin: 30px 0; font-weight: bold; display: flex; justify-content: space-between">
     <div style="font-size: 22px">

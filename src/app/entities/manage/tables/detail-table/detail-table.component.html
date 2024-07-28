@@ -26,7 +26,14 @@
       <span class="content_detail-title">{{'manage.manageTable.price' | translate}}  : </span><span class="content_detail-title color">{{ detailTable.total_amount | currency: 'VND'}}</span>
     </div>
     <div class="content_detail--item">
+      <span class="content_detail-title">{{'Mã nv tạo đơn' | translate}}  : </span><span class="content_detail-title color">{{ detailTable.account_id !== '0' ? detailTable.account_id : 'N/A'}}</span>
+    </div>
+    <div class="content_detail--item">
+      <span class="content_detail-title">{{'Chiết khấu' | translate}}  : </span><span class="content_detail-title color">{{ detailTable.discount !== '0' ? detailTable.discount : 'N/A'}} %</span>
+    </div>
+    <div class="content_detail--item">
       <span class="content_detail-title">{{'manage.manageTable.note' | translate}}  : </span><span class="content_detail-title color">{{ detailTable.note}}</span>
     </div>
+
   </section>
 </div>

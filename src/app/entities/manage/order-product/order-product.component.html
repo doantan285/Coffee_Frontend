@@ -4,10 +4,13 @@
   [rowData]="dataProducts"
   [noData]="noData"
   [orderSuc]="orderSuc"
+  [loading]="loading"
+  [dataOldOrder]="dataOldOrder"
   [clearSearchProduct]="clearSearchProduct"
   (clearValueSearch)="clearValueSearch($event)"
   (updateRow)="updateRow($event)"
   (searchValue)="onSearch($event)"
   (categoryProduct)="categoryProduct($event)"
   (OnRefresh)="refresh($event)"
+
 ></app-share-manage>

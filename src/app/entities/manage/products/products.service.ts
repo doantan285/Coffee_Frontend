@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
+  private getOld =  'http://localhost/coffee_backend/order/models/getOrderOld.php'
   private getCoffee = 'http://localhost/coffee_backend/manage/models/products/getCoffeeProduct.php'
   private getCake = 'http://localhost/coffee_backend/manage/models/products/getCakeProduct.php'
   private getSnack = 'http://localhost/coffee_backend/manage/models/products/getSnackProduct.php'
@@ -20,6 +21,10 @@ export class ProductsService {
 
   searchProduct(data: any): Observable<any>{
     return this.http.post(this.search, data);
+  }
+
+  getOldOrder(param: any): Observable<any> {
+    return this.http.get<any[]>(`${this.getOld}?table_number=${param}`, { responseType: 'json' });
   }
   getProductCoffee(): Observable<any> {
     return this.http.get<any[]>(this.getCoffee, {responseType: 'json'});

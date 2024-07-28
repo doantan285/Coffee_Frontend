@@ -188,6 +188,8 @@
           {{ "manage.revenues.customer_name" | translate }}
         </th>
         <th>{{ "manage.orders.products" | translate }}</th>
+        <th>{{ "Mã nv tạo đơn" | translate }}</th>
+        <th>{{ "Chiết khấu" | translate }}</th>
         <th>{{ "manage.orders.totals" | translate }}</th>
         <th *ngIf="order">{{ "manage.orders.status" | translate }}</th>
         <th>{{ "manage.action" | translate }}</th>
@@ -216,10 +218,16 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 300px;
+            max-width: 240px;
           "
         >
           {{ col?.product_name }}
+        </td>
+        <td>
+          {{col.account_id !== '0' ? col.account_id : 'N/A'}}
+        </td>
+        <td>
+          {{ col.discount}} %
         </td>
         <td>{{ col?.total_amount | currency : "VND" }}</td>
         <td
@@ -520,7 +528,30 @@
       <header>
         <h1>{{ "manage.manageTable.listOrder" | translate }}</h1>
       </header>
-      <div class="orderProduct__listed">
+      <div *ngIf="dataOldOrder" class="dataOldOrder">
+          <h4>
+            Danh sách các món đã đặt trước đó
+            <i class="fas fa-info-circle" 
+            matTooltip="Không chỉnh sửa đơn hàng đã đặt trước"
+            ></i>
+          </h4>
+          <div class="dataOldOrder_content" *ngFor="let item of dataOldOrder?.product_name">
+            <div class="dataOldOrder_content-item">
+              <span>Sản phẩm:</span>
+              <span>{{item.name}} ({{item.total}})</span>
+            </div>
+            
+          </div>
+          <div class="dataOldOrder_content">
+            <span>Giá:</span>
+            <span>{{dataOldOrder?.total_amount  | currency : "VND" }}</span>
+          </div>
+          <div class="dataOldOrder_content">
+            <span>Chiết khấu:</span>
+            <span>{{dataOldOrder?.discount}} %</span>
+          </div>
+      </div>
+      <div class="orderProduct__listed" [ngStyle]="{'max-height':dataOldOrder ?  '210px !important' : ''}">
         <div class="listProduct__item" *ngFor="let item of productOrdered">
           <div class="listProduct__item--img">
             <img src="{{ item.image_url }}" alt="item.name" />
@@ -560,23 +591,36 @@
             </div>
           </div>
         </div>
+        
       </div>
+      
       <div class="orderProduct__listed--submit">
+        <div class="total_price" *ngIf="productOrdered.length >= 1">
+          <div class="discount" >
+            <span style="font-weight: bold;">Chiết khấu: </span>
+            <input type="number" [(ngModel)]="discount" min="0" max="100" placeholder=""> %
+          </div>
+          <div class="total_price_item">
+            Tổng tiền: <span>{{ getTotalPrice() | currency : "VND" }}</span>
+          </div>
+        </div>
         <div
           style="
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            min-width: 444px;
+            width: 100%;
+            justify-content: space-around;
+
           "
         >
           <button
             mat-button
             (click)="clearOrder()"
             [ngStyle]="{
-              'background-color': productOrdered.length === 0 ? '#ccc' : 'blue',
+              'background-color': productOrdered.length === 0 ? '#ccc' : 'red',
               color: productOrdered.length === 0 ? '#000' : '#fff'
             }"
+            style="margin-right: 8px;"
             [disabled]="productOrdered.length === 0"
           >
             xóa

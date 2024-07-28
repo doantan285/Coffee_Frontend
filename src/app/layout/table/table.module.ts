@@ -11,8 +11,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {HighchartsChartModule} from "highcharts-angular";
-
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [TableComponent],
@@ -31,6 +30,7 @@ import {HighchartsChartModule} from "highcharts-angular";
         FormsModule,
         MatProgressSpinnerModule,
         HighchartsChartModule,
+        MatTooltipModule,
     ]
 })
 export class TableModule { }

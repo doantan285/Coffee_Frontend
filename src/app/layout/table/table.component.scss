@@ -281,8 +281,28 @@ table {
     background-color: #fff;
     min-height: 500px;
     border-radius: 14px;
+    .dataOldOrder{
+      margin: 0 20px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 12px;
+      h4{
+        font-weight: bold;
+      }
+      .dataOldOrder_content{
+        margin-bottom: 12px;
+        span{
+          margin-right: 8px;
+        }
+        .dataOldOrder_content-item{
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
     .orderProduct__listed{
-      max-height: 410px !important;
+      max-height: 380px !important;
       margin-right: 20px;
     }
     .listProduct__item {
@@ -341,11 +361,21 @@ table {
     }
 
     .orderProduct__listed--submit{
+      width: 420px;
       position: absolute;
-      bottom: 40px;
+      bottom: -6px;
       display: flex;
-      justify-content: space-around;
-      align-items: center;
+      flex-direction: column;
+      .total_price{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 30px;
+        margin-bottom: 10px;
+        padding: 8px 0;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+      }
     }
 
   }
@@ -368,7 +398,10 @@ table {
       margin-left: 30px ;
       overflow-y: auto;
       position: relative;
+    
     }
+
+    
 
     .orderProduct__listed::-webkit-scrollbar {
       width: 10px;
